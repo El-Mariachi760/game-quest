@@ -22,11 +22,61 @@ const eventSchema = new Schema(
         }
     },
     {
+        type: {
+            type: String,
+            required: true,
+            enum: ['Private', 'Public']
+        }
+    },
+    {
+        date: {
+            type: Date,
+            required: true,
+        }
+    },
+    {
+        location: {
+            type: String,
+            required: true,
+            minlength: 1
+        }   
+    },
+    {
+        description: {
+            type: String,
+        }
+    },
+    {
+        game: {
+            type: String,
+            required: true
+        }
+    },
+    {
+        maxPeople: {
+            type: Integer,
+            required: true,
+        }
+    },
+    {
+        signedPeople: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ]
+        
+    },
+    {
         toJSON: {
             virtuals: true
         }
     }
 );
+
+userSchema.virtual('signedPeopleCount').get(function() {
+    return this.signedPeople.length;
+  });
 
 const Event = model('Event', eventSchema);
 
