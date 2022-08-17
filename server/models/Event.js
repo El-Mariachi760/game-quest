@@ -44,18 +44,21 @@ const eventSchema = new Schema(
     {
         description: {
             type: String,
+            trim: true,
         }
     },
     {
         game: {
             type: String,
-            required: true
+            required: true,
+            trim: true
         }
     },
     {
         maxPeople: {
             type: Integer,
             required: true,
+            min: 1
         }
     },
     {
