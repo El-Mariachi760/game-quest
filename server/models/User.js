@@ -12,6 +12,7 @@ const bcrypt = require('bcrypt');
 // friendRequest: [User] (list of users who have sent friend requests)
 // friends: [User]
 // followers: [User]
+// following: [User]
 
 // Virtual presave middleware for encrypting password
 // Virtual for friend count which return friends array length
