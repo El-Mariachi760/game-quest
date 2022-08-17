@@ -3,7 +3,7 @@
 const { Schema, model } = require('mongoose');
 
 // Title: String!
-// Type: Private/Public
+// Type: Private/Public (add validation so it can only be "private" or "public")
 // Date: Date!
 // Location: String!
 // Description: String!

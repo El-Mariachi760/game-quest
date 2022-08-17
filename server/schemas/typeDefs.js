@@ -33,17 +33,64 @@ const { gql } = require('apollo-server-express');
 // deleteEvent(id)
 
 const typeDefs = gql`
+    type Event {
+        _id: ID
+        title: String
+        type: String
+        date: String
+        location: String
+        description: String
+        game: String
+        maxPeople: Int
+        signedPeople: [User]
+    }
+
     type User {
         _id: ID
         username: String
+        type: String
+        password: String
+        createdEvents: [Event]
+        signedEvents: [Event]
+        friendRequest: [User]
+        friends: [User]
+        followers: [User]
+        following: [User]
+    }
+
+    type Auth {
+        token: ID!
+        user: User
     }
 
     type Query {
         users: [User]
+        businessUsers: [User]
+        getUser(username: String!): User
+        getMe: User
+
+        events: [Event]
+        privateEvents: [Event]
+        publicEvents: [Event]
+        eventById(_id: ID!): Event
     }
 
     type Mutation {
-        addUser(username: String!): User
+        addUser(username: String!, email: String!, password: String!): User
+        editUser(username: String!, email: String!, password: String!): User
+        deleteUser(_id: ID!): User
+        login(email: String!, password: String!): Auth
+        
+        sendFriendRequest(friendId: ID!): User
+        followUser(followId: ID!): [User]
+        unfollowUser(unfollowId: ID!): [User]
+
+        acceptFriendRequest(friendId: ID!): [User]
+        denyFriendRequest(friendId: ID!): User
+
+        addEvent(title: String!, type: String!, date: String!, location: String!, description: String!, game: String!, maxPeople: Int!): Event
+        editEvent(title: String!, type: String!, date: String!, location: String!, description: String!, game: String!, maxPeople: Int!): Event
+        deleteEvent(eventId: ID!): Event
     }
 `;
 

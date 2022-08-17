@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 // Email: String!
 // Username: String!
-// Type: Business/User
+// Type: Business/User (add validation so it can only be "business" or "user")
 // Password: String! (bcrypt)
 // createdEvents: [Event]
 // signedEvents: [Event]
