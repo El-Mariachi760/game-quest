@@ -1,6 +1,6 @@
 import React from 'react';
 import coverImage from '../assets/pool.jpg';
-import
+
 
 function logIn() {
     return (
@@ -13,6 +13,9 @@ function logIn() {
           People have turned to GameQuest to meet people, make friends, find local activities, and even grow a business. 
           Thousands of events are happening every day. What are you waiting for to join the fun?
           </p>
+
+          <button className='loginbtn'>Log In</button>
+          <button className='signupbtn'>Sign Up</button>
         </div>
       </section>
     );
