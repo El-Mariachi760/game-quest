@@ -1,9 +1,10 @@
 import React from 'react';
 import coverImage from '../assets/pool.jpg';
+import
 
 function logIn() {
     return (
-      <section className="about1">
+      <section className='about1'>
         <img src={coverImage} className="my-2" style={{ width: "100%" }} alt="cover" />
         <h1 id="about">GameQuest</h1>
         <div className="about2">
@@ -12,7 +13,6 @@ function logIn() {
           People have turned to GameQuest to meet people, make friends, find local activities, and even grow a business. 
           Thousands of events are happening every day. What are you waiting for to join the fun?
           </p>
-          
         </div>
       </section>
     );
