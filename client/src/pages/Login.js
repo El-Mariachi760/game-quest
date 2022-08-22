@@ -1,8 +1,11 @@
 import React from 'react';
 import coverImage from '../assets/pool.jpg';
+import SignUp from './components/SignUp'
+import LogIn from './components/LogIn'
 
 
 function logIn() {
+  // const form1 = SignUp
     return (
       <section className='about1'>
         <img src={coverImage} className="my-2" style={{ width: "100%" }} alt="cover" />
