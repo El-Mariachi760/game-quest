@@ -1,7 +1,7 @@
 import React from 'react';
 import coverImage from '../assets/pool.jpg';
-import SignUp from './components/SignUp'
-import LogIn from './components/LogIn'
+// import SignUp from './components/SignUp'
+// import LogIn from './components/LogIn'
 
 
 function logIn() {
