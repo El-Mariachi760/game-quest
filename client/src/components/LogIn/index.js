@@ -69,6 +69,7 @@ function LoginForm() {
         </div>
         <div className="button-container">
           <input type="submit" />
+          <button>Sign Up</button>
         </div>
       </form>
     </div>
