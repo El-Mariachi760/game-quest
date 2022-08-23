@@ -1,9 +1,9 @@
-const { User, Event } = require("../models");
-const { AuthenticationError } = require("apollo-server-express");
-const { signToken } = require("../utils/auth");
+const { User, Event } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require('../utils/auth');
 
 // (JWT just means its needs context info from the header request)
-// QUERIES:
+// QUERIES: 
 // users
 // businessUsers
 // getUser(id)
@@ -34,173 +34,278 @@ const { signToken } = require("../utils/auth");
 // deleteEvent(id)
 
 const resolvers = {
-  Query: {
-    users: async () => {
-      return User.find({ type: "user" });
+    Query: {
+        users: async () => {
+            return User.find({type: "user"})
+            .populate('createdEvents')
+            .populate('signedEvents')
+            .populate('friendRequest')
+            .populate('friends')
+            .populate('followers')
+            .populate('following')
+        },
+
+        businessUsers: async () => {
+            return User.find({type: "business"})
+            .populate('createdEvents')
+            .populate('signedEvents')
+            .populate('friendRequest')
+            .populate('friends')
+            .populate('followers')
+            .populate('following');
+        },
+
+        getUser: async (parent, { username }) => {
+            return User.findOne({ username })
+            .populate('createdEvents')
+            .populate('signedEvents')
+            .populate('friendRequest')
+            .populate('friends')
+            .populate('followers')
+            .populate('following')
+        },
+
+        getMe: async (parent, args, context) => {
+            if(context.user){
+                const userData = await User.findOne({ _id: context.user._id })
+                .populate('createdEvents')
+                .populate('signedEvents')
+                .populate('friendRequest')
+                .populate('friends')
+                .populate('followers')
+                .populate('following')
+
+                return userData;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        events: async () => {
+            return Event.find()
+            .populate('signedPeople');
+        },
+
+        privateEvents: async () => {
+            return Event.find({ type: "private" })
+            .populate('signedPeople');
+        },
+
+        publicEvents: async () => {
+            return Event.find({ type: "public" })
+            .populate('signedPeople');
+        },
+
+        eventById: async (parent, { _id }) => {
+            return Event.findOne({ _id })
+            .populate('signedPeople')
+        }
     },
 
-    businessUsers: async () => {
-      return User.find({ type: "business" });
-    },
+    Mutation: {
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+            return { token, user };
+        },
 
-    getUser: async (parent, { username }) => {
-      return User.findOne({ username });
-    },
+        editUser: async (parent, { username, email, password}, context) => {
+            if(context.user) {
+                const user = await User.findOneAndUpdate(
+                    { username: context.user.username },
+                    { username, email, password },
+                    { new: true }
+                )
 
-    getMe: async (parent, args, context) => {
-      if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id });
+                return user;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!');
+        },
 
-        return userData;
-      }
+        deleteUser: async ( parent, args, context ) => {
+            const user = await User.findOneAndDelete(
+                { username: args.username }
+            )
 
-      throw new AuthenticationError("Not logged in");
-    },
+            return user;
+        },
 
-    events: async () => {
-      return Event.find();
-    },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
 
-    privateEvents: async () => {
-      return Event.find({ type: "private" });
-    },
+            if(!user) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-    publicEvents: async () => {
-      return Event.find({ type: "public" });
-    },
+            const correctPw = await user.isCorrectPassword(password);
 
-    eventById: async (parent, { _id }) => {
-      return Event.findOne({ _id });
-    },
-  },
+            if(!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-  Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
-      return { token, user };
-    },
+            const token = signToken(user);
+            return {token, user};
+        },
 
-    editUser: async (parent, args, context) => {
-      const user = await User.findOneAndUpdate(
-        { username: context.user.username },
-        { args },
-        { new: true }
-      );
-
-      return user;
-    },
-
-    deleteUser: async (parent, args, context) => {
-      const user = await User.findOneAndDelete({ username: args.username });
-
-      return user;
-    },
-
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        throw new AuthenticationError("Incorrect credentials");
-      }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
-      }
-
-      const token = signToken(user);
-      return { token, user };
-    },
-
-    sendFriendRequest: async (parent, { friendId }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: friendId },
-          { $addToSet: { friendRequest: context.user._id } },
-          { new: true }
-        ).populate("friendRequest");
-
-        return updatedUser;
-      }
-
-      throw new AuthenticationError("You need to be logged in!");
-    },
-
-    followUser: async (parent, {followId}, context) => {
-        if (context.user) {
-            const updatedUser = await User.findOneAndUpdate(
-              { _id: context.user._id },
-              { $addToSet: { following: followId } },
-              { new: true }
-            ).populate("following");
+        sendFriendRequest: async (parent, { friendId }, context) => {
+            if (context.user) {
+              const updatedUser = await User.findOneAndUpdate(
+                { _id: friendId },
+                { $addToSet: { friendRequest: context.user._id } },
+                { new: true }
+              ).populate("friendRequest");
+      
+              return updatedUser;
+            }
+      
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        followUser: async (parent, {followId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { following: followId } },
+                { new: true }
+                ).populate("following");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        unfollowUser: async (parent, {unfollowId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { following: unfollowId } },
+                { new: true }
+                ).populate("following");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        acceptFriendRequest: async (parent, {friendId}, context) => {
+            if (context.user) {
+                //update user accepting friend request 
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { friendRequest: friendId }, $addToSet:{friends: friendId} },
+                { new: true }
+                ).populate("friends");
     
-            return updatedUser;
-          }
+                //add user accepting request to the friend list of user sending request
+                const updatedFriend = await User.findOneAndUpdate(
+                    {_id: friendId },
+                    {$addToSet: {friends: context.user._id}},
+                    {new: true }
+                );
     
-          throw new AuthenticationError("You need to be logged in!");
-
-    },
-
-    unfollowUser: async (parent, {unfollowId}, context) => {
-        if (context.user) {
-            const updatedUser = await User.findOneAndUpdate(
-              { _id: context.user._id },
-              { $pull: { following: unfollowId } },
-              { new: true }
-            ).populate("following");
     
-            return updatedUser;
-          }
-    
-          throw new AuthenticationError("You need to be logged in!");
-    },
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        denyFriendRequest: async (parent, {friendId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { friendRequest: friendId } },
+                { new: true }
+                ).populate("friendRequest");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
 
-    acceptFriendRequest: async (parent, {friendId}, context) => {
-        if (context.user) {
-            //update user accepting friend request 
-            const updatedUser = await User.findOneAndUpdate(
-              { _id: context.user._id },
-              { $pull: { friendRequest: friendId }, $addToSet:{friends: friendId} },
-              { new: true }
-            ).populate("friends");
+        addEvent: async (parent, args, context) => {
+            if(context.user){
+                const event = await Event.create(args);
 
-            //add user accepting request to the friend list of user sending request
-            const updatedFriend = await User.findOneAndUpdate(
-                {_id: friendId },
-                {$addToSet: {friends: context.user._id}},
-                {new: true }
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { createdEvents: event._id } },
+                    { new: true }
+                )
+
+                return event;    
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        editEvent: async (parent, { eventId, title, type, date, location, description, game, maxPeople }, context) => {
+            const event = await Event.findByIdAndUpdate(
+                { _id: eventId },
+                { title, type, date, location, description, game, maxPeople },
+                { new: true }
             );
 
+            return event;
+        },
 
-    
-            return updatedUser;
-          }
-    
-          throw new AuthenticationError("You need to be logged in!");
-    },
+        deleteEvent: async (parent, { eventId }, context) => {
+            if(context.user){
+                const event = await Event.findByIdAndDelete(eventId);
 
-    denyFriendRequest: async (parent, {friendId}, context) => {
-        if (context.user) {
-            const updatedUser = await User.findOneAndUpdate(
-              { _id: context.user._id },
-              { $pull: { friendRequest: friendId } },
-              { new: true }
-            ).populate("friendRequest");
-    
-            return updatedUser;
-          }
-    
-          throw new AuthenticationError("You need to be logged in!");
-    },
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { createdEvents: event._id } },
+                    { new: true }
+                )
 
-    addEvent: async (parent, args, context) => {},
+                return event;    
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
 
-    editEvent: async (parent, args, context) => {},
+        signupForEvent: async (parent, { eventId }, context) => {
+            if(context.user){
+                const event = await Event.findByIdAndUpdate(
+                    { _id: eventId },
+                    { $push: { signedPeople: context.user._id } },
+                    { new: true }
+                )
+                .populate('signedPeople');
 
-    deleteEvent: async (parent, args, context) => {},
-  },
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { signedEvents: eventId } },
+                    { new: true }
+                )
+
+                return event;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeSignup: async (parent, { eventId, userId }, context) => {
+            const event = await Event.findByIdAndUpdate(
+                { _id: eventId },
+                { $pull: { signedPeople: userId } },
+                { new: true }
+            )
+            .populate('signedPeople');
+
+            await User.findByIdAndUpdate(
+                { _id: userId },
+                { $pull: { signedEvents: eventId } },
+                { new: true }
+            )
+
+            return event;
+            
+        }
+    }
 };
 
 module.exports = resolvers;

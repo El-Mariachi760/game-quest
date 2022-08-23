@@ -63,44 +63,43 @@ const userSchema = new Schema(
         signedEvents: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Event'
+                ref: 'Event',
             }
         ],
 
         friendRequest: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
             }
         ],
 
         friends: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
             }
         ],
 
         followers: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
             }
         ],
-
 
         following: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
             }
         ],
+    },
+    {
+        toJSON: {
+            virtuals: true
+        }
     }
-    // {
-    //     toJSON: {
-    //         virtuals: true
-    //     }
-    // }
 );
 
 

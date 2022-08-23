@@ -1,6 +1,7 @@
 // Event model
 // import User
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 // Title: String!
 // Type: Private/Public (add validation so it can only be "private" or "public")
@@ -24,12 +25,14 @@ const eventSchema = new Schema(
         type: {
             type: String,
             required: true,
-            enum: ['Private', 'Public']
+            enum: ['Private', 'Public'],
+            default: 'Public'
         },
 
         date: {
             type: Date,
             required: true,
+            get: timestamp => dateFormat(timestamp)
         },
 
         location: {
@@ -58,20 +61,21 @@ const eventSchema = new Schema(
         signedPeople: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
             }
         ]
     },
     {
         toJSON: {
-            virtuals: true
+            virtuals: true,
+            getters: true
         }
     }
 );
 
 eventSchema.virtual('signedPeopleCount').get(function() {
     return this.signedPeople.length;
-  });
+});
 
 const Event = model('Event', eventSchema);
 
