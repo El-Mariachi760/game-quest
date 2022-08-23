@@ -132,7 +132,7 @@ const resolvers = {
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $addToSet: { following: businessId } },
+              { $addToSet: { following: followId } },
               { new: true }
             ).populate("following");
     
@@ -147,7 +147,7 @@ const resolvers = {
         if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $pull: { following: businessId } },
+              { $pull: { following: unfollowId } },
               { new: true }
             ).populate("following");
     
