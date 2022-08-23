@@ -1,5 +1,24 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_ALL_EVENTS = gql`
+  query events{
+    events {
+      _id
+      title
+      date
+      description
+      signedPeople {
+        _id
+        username
+      }
+      maxPeople
+      game
+      location
+      type
+    }
+  }
+`;
+
 export const QUERY_EVENTS = gql`
   query GetUser($username: String!) {
     getUser(username: $username) {

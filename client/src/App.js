@@ -7,23 +7,48 @@ import MyProfile from './pages/MyProfile';
 import PrivateEvents from './pages/PrivateEvents';
 import PrivateRoutes from './utils/PrivateRoutes';
 
+// Apollo imports
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+  uri: 'graphql'
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    }
+  }
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+});
+
 
 
 function App() {
   return (
-    <div className='App'>
-      <Router>
-        <Nav />
-        <Routes>
-          <Route path="/Login" element={<Login />} />
-          <Route element={<PrivateRoutes />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/myprofile" element={<MyProfile />} />
-            <Route path="/privateEvents" element={<PrivateEvents />} />
-          </Route>
-        </Routes>
-      </Router>
-    </div>
+    <ApolloProvider client={client}>
+      <div className='App'>
+        <Router>
+          <Nav />
+          <Routes>
+            <Route path="/Login" element={<Login />} />
+            <Route element={<PrivateRoutes />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/myprofile" element={<MyProfile />} />
+              <Route path="/privateEvents" element={<PrivateEvents />} />
+            </Route>
+          </Routes>
+        </Router>
+      </div>  
+    </ApolloProvider>
   );
 }
 
