@@ -83,11 +83,12 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         
         sendFriendRequest(friendId: ID!): User
-        followUser(followId: ID!): [User]
-        unfollowUser(unfollowId: ID!): [User]
+        followUser(followId: ID!): User
+        unfollowUser(unfollowId: ID!): User
 
-        acceptFriendRequest(friendId: ID!): [User]
+        acceptFriendRequest(friendId: ID!): User
         denyFriendRequest(friendId: ID!): User
+        removeFriend(friendId: ID!): User
 
         addEvent(title: String!, type: String, date: String!, location: String!, description: String!, game: String!, maxPeople: Int!): Event
         editEvent(eventId: ID!, title: String!, type: String!, date: String!, location: String!, description: String!, game: String!, maxPeople: Int!): Event

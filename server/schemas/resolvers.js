@@ -148,24 +148,108 @@ const resolvers = {
             return {token, user};
         },
 
-        sendFriendRequest: async (parent, args, context) => {
-
+        sendFriendRequest: async (parent, { friendId }, context) => {
+            if (context.user) {
+              const updatedUser = await User.findOneAndUpdate(
+                { _id: friendId },
+                { $addToSet: { friendRequest: context.user._id } },
+                { new: true }
+              ).populate("friendRequest");
+      
+              return updatedUser;
+            }
+      
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        followUser: async (parent, {followId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { following: followId } },
+                { new: true }
+                ).populate("following");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        unfollowUser: async (parent, {unfollowId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { following: unfollowId } },
+                { new: true }
+                ).populate("following");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        acceptFriendRequest: async (parent, {friendId}, context) => {
+            if (context.user) {
+                //update user accepting friend request 
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { friendRequest: friendId }, $addToSet:{friends: friendId} },
+                { new: true }
+                ).populate("friends");
+    
+                //add user accepting request to the friend list of user sending request
+                const updatedFriend = await User.findOneAndUpdate(
+                    {_id: friendId },
+                    {$addToSet: {friends: context.user._id}},
+                    {new: true }
+                );
+    
+    
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        denyFriendRequest: async (parent, {friendId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { friendRequest: friendId } },
+                { new: true }
+                ).populate("friendRequest");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
         },
 
-        followUser: async (parent, args, context) => {
-
-        },
-
-        unfollowUser: async (parent, args, context) => {
-
-        },
-
-        acceptFriendRequest: async (parent, args, context) => {
-
-        },
-
-        denyFriendRequest: async (parent, args, context) => {
-            
+        removeFriend: async (parent, {friendId}, context) => {
+            if (context.user) {
+                //update user accepting friend request 
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { friends: friendId } },
+                { new: true }
+                ).populate("friends");
+    
+                //add user accepting request to the friend list of user sending request
+                const updatedFriend = await User.findOneAndUpdate(
+                    {_id: friendId },
+                    {$pull: {friends: context.user._id}},
+                    {new: true }
+                );
+    
+    
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
         },
 
         addEvent: async (parent, args, context) => {
