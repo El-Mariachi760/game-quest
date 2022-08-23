@@ -22,6 +22,6 @@ function logIn() {
         </div>
       </section>
     );
-  }
+}
   
   export default logIn;
