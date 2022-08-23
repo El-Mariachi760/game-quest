@@ -77,12 +77,13 @@ const resolvers = {
     Mutation: {
         addUser: async (parent, args) => {
             const user = await User.create(args);
-            return user;
+            const token = signToken(user);
+            return { token, user };
         },
 
         editUser: async (parent, args, context) => {
-            const user = await User.findByIdAndUpdate(
-                { _id: context.user._id },
+            const user = await User.findOneAndUpdate(
+                { username: context.user.username },
                 { args },
                 { new: true }
             )
@@ -91,8 +92,8 @@ const resolvers = {
         },
 
         deleteUser: async ( parent, args, context ) => {
-            const user = await User.findByIdAndDelete(
-                { _id: context.user._id }
+            const user = await User.findOneAndDelete(
+                { username: args.username }
             )
 
             return user;
@@ -132,7 +133,7 @@ const resolvers = {
         },
 
         denyFriendRequest: async (parent, args, context) => {
-
+            
         },
 
         addEvent: async (parent, args, context) => {

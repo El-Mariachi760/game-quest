@@ -31,83 +31,76 @@ const userSchema = new Schema(
             required: true,
             unique: true,
             trim: true
-        }
-    },
-    {
+        },
+
         email: {
             type: String,
             required: true,
             unique: true,
             match: [/.+@.+\..+/, 'Must match an email address!']
           },
-    },
-    {
-        type: {
-            type: String,
-            required: true,
-            enum: ['business', 'user']
-        }
-    },
-    {
+
         password: {
             type: String,
             required: true,
             minlength: 5
-        }
-    },
-    {
+        },
+
+        type: {
+            type: String,
+            required: true,
+            enum: ['business', 'user'],
+            default: 'user'
+        },
+
         createdEvents: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Event'
             }
-        ]
-    },
-    {
+        ],
+
         signedEvents: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Event'
             }
-        ]
-    },
-    {
+        ],
+
         friendRequest: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
-        ]
-    },
-    {
+        ],
+
         friends: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
-        ]
-    },
-    {
+        ],
+
         followers: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
-        ]
-    },
-    {
+        ],
+
+
         following: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
-        ]
-    },
-    {
-        toJSON: {
-            virtuals: true
-        }
+        ],
     }
+    // {
+    //     toJSON: {
+    //         virtuals: true
+    //     }
+    // }
 );
 
 
@@ -115,20 +108,20 @@ const userSchema = new Schema(
 userSchema.pre('save', async function(next) {
     if (this.isNew || this.isModified('password')) {
       const saltRounds = 10;
-      this.password = await bcrypt.hash(this.password, saltRounds);
+        this.password = await bcrypt.hash(this.password, saltRounds);
     }
   
     next();
-  });
+});
   
-  // compare the incoming password with the hashed password
-  userSchema.methods.isCorrectPassword = async function(password) {
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function(password) {
     return bcrypt.compare(password, this.password);
-  };
+};
   
-  userSchema.virtual('friendCount').get(function() {
+userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
-  });
+});
 
 const User = model('User', userSchema);
 

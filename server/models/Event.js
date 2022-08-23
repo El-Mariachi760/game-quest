@@ -19,56 +19,48 @@ const eventSchema = new Schema(
             type: String,
             required: true,
             minlength: 1
-        }
-    },
-    {
+        },
+
         type: {
             type: String,
             required: true,
             enum: ['Private', 'Public']
-        }
-    },
-    {
+        },
+
         date: {
             type: Date,
             required: true,
-        }
-    },
-    {
+        },
+
         location: {
             type: String,
             required: true,
             minlength: 1
-        }   
-    },
-    {
+        }  , 
+
         description: {
             type: String,
             trim: true,
-        }
-    },
-    {
+        },
+
         game: {
             type: String,
             required: true,
             trim: true
-        }
-    },
-    {
+        },
+
         maxPeople: {
-            type: Integer,
+            type: Number,
             required: true,
             min: 1
-        }
-    },
-    {
+        },
+
         signedPeople: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
         ]
-        
     },
     {
         toJSON: {
@@ -77,7 +69,7 @@ const eventSchema = new Schema(
     }
 );
 
-userSchema.virtual('signedPeopleCount').get(function() {
+eventSchema.virtual('signedPeopleCount').get(function() {
     return this.signedPeople.length;
   });
 

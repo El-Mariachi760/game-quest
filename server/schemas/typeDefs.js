@@ -48,8 +48,9 @@ const typeDefs = gql`
     type User {
         _id: ID
         username: String
-        type: String
+        email: String
         password: String
+        type: String
         createdEvents: [Event]
         signedEvents: [Event]
         friendRequest: [User]
@@ -76,9 +77,9 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(username: String!, email: String!, password: String!): User
+        addUser(username: String!, email: String!, password: String!): Auth
         editUser(username: String!, email: String!, password: String!): User
-        deleteUser(_id: ID!): User
+        deleteUser(username: String!): User
         login(email: String!, password: String!): Auth
         
         sendFriendRequest(friendId: ID!): User
