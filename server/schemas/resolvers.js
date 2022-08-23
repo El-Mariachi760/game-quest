@@ -36,20 +36,44 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         users: async () => {
-            return User.find({type: "user"});
+            return User.find({type: "user"})
+            .populate('createdEvents')
+            .populate('signedEvents')
+            .populate('friendRequests')
+            .populate('friends')
+            .populate('followers')
+            .populate('following')
         },
 
         businessUsers: async () => {
-            return User.find({type: "business"});
+            return User.find({type: "business"})
+            .populate('createdEvents')
+            .populate('signedEvents')
+            .populate('friendRequests')
+            .populate('friends')
+            .populate('followers')
+            .populate('following');
         },
 
         getUser: async (parent, { username }) => {
             return User.findOne({ username })
+            .populate('createdEvents')
+            .populate('signedEvents')
+            .populate('friendRequests')
+            .populate('friends')
+            .populate('followers')
+            .populate('following')
         },
 
         getMe: async (parent, args, context) => {
             if(context.user){
                 const userData = await User.findOne({ _id: context.user._id })
+                .populate('createdEvents')
+                .populate('signedEvents')
+                .populate('friendRequests')
+                .populate('friends')
+                .populate('followers')
+                .populate('following')
 
                 return userData;
             }
@@ -58,19 +82,23 @@ const resolvers = {
         },
 
         events: async () => {
-            return Event.find();
+            return Event.find()
+            .populate('signedPeople');
         },
 
         privateEvents: async () => {
-            return Event.find({ type: "private" });
+            return Event.find({ type: "private" })
+            .populate('signedPeople');
         },
 
         publicEvents: async () => {
-            return Event.find({ type: "public" });
+            return Event.find({ type: "public" })
+            .populate('signedPeople');
         },
 
         eventById: async (parent, { _id }) => {
             return Event.findOne({ _id })
+            .populate('signedPeople')
         }
     },
 
@@ -81,14 +109,18 @@ const resolvers = {
             return { token, user };
         },
 
-        editUser: async (parent, args, context) => {
-            const user = await User.findOneAndUpdate(
-                { username: context.user.username },
-                { args },
-                { new: true }
-            )
+        editUser: async (parent, { username, email, password}, context) => {
+            if(context.user) {
+                const user = await User.findOneAndUpdate(
+                    { username: context.user.username },
+                    { username, email, password },
+                    { new: true }
+                )
 
-            return user;
+                return user;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!');
         },
 
         deleteUser: async ( parent, args, context ) => {
@@ -137,15 +169,43 @@ const resolvers = {
         },
 
         addEvent: async (parent, args, context) => {
+            if(context.user){
+                const event = await Event.create(args);
 
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { createdEvents: event._id } },
+                    { new: true }
+                )
+
+                return event;    
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
 
-        editEvent: async (parent, args, context) => {
+        editEvent: async (parent, { eventId, title, type, date, location, description, game, maxPeople }, context) => {
+            const event = await Event.findByIdAndUpdate(
+                { _id: eventId },
+                { title, type, date, location, description, game, maxPeople },
+                { new: true }
+            );
 
+            return event;
         },
 
-        deleteEvent: async (parent, args, context) => {
+        deleteEvent: async (parent, {eventId}, context) => {
+            if(context.user){
+                const event = await Event.findByIdAndDelete(eventId);
 
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { createdEvents: event._id } },
+                    { new: true }
+                )
+
+                return event;    
+            }
+            throw new AuthenticationError('You need to be logged in!');
         }
     }
 };

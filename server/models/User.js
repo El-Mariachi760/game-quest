@@ -1,6 +1,7 @@
 // User model
 // import Event
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+const { Schema, model } = mongoose;
 const bcrypt = require('bcrypt');
 
 // Email: String!
@@ -88,19 +89,18 @@ const userSchema = new Schema(
             }
         ],
 
-
         following: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
         ],
+    },
+    {
+        toJSON: {
+            virtuals: true
+        }
     }
-    // {
-    //     toJSON: {
-    //         virtuals: true
-    //     }
-    // }
 );
 
 
