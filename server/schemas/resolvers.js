@@ -39,7 +39,7 @@ const resolvers = {
             return User.find({type: "user"})
             .populate('createdEvents')
             .populate('signedEvents')
-            .populate('friendRequests')
+            .populate('friendRequest')
             .populate('friends')
             .populate('followers')
             .populate('following')
@@ -49,7 +49,7 @@ const resolvers = {
             return User.find({type: "business"})
             .populate('createdEvents')
             .populate('signedEvents')
-            .populate('friendRequests')
+            .populate('friendRequest')
             .populate('friends')
             .populate('followers')
             .populate('following');
@@ -59,7 +59,7 @@ const resolvers = {
             return User.findOne({ username })
             .populate('createdEvents')
             .populate('signedEvents')
-            .populate('friendRequests')
+            .populate('friendRequest')
             .populate('friends')
             .populate('followers')
             .populate('following')
@@ -70,7 +70,7 @@ const resolvers = {
                 const userData = await User.findOne({ _id: context.user._id })
                 .populate('createdEvents')
                 .populate('signedEvents')
-                .populate('friendRequests')
+                .populate('friendRequest')
                 .populate('friends')
                 .populate('followers')
                 .populate('following')
@@ -193,7 +193,7 @@ const resolvers = {
             return event;
         },
 
-        deleteEvent: async (parent, {eventId}, context) => {
+        deleteEvent: async (parent, { eventId }, context) => {
             if(context.user){
                 const event = await Event.findByIdAndDelete(eventId);
 
@@ -206,6 +206,44 @@ const resolvers = {
                 return event;    
             }
             throw new AuthenticationError('You need to be logged in!');
+        },
+
+        signupForEvent: async (parent, { eventId }, context) => {
+            if(context.user){
+                const event = await Event.findByIdAndUpdate(
+                    { _id: eventId },
+                    { $push: { signedPeople: context.user._id } },
+                    { new: true }
+                )
+                .populate('signedPeople');
+
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { signedEvents: eventId } },
+                    { new: true }
+                )
+
+                return event;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeSignup: async (parent, { eventId, userId }, context) => {
+            const event = await Event.findByIdAndUpdate(
+                { _id: eventId },
+                { $pull: { signedPeople: userId } },
+                { new: true }
+            )
+            .populate('signedPeople');
+
+            await User.findByIdAndUpdate(
+                { _id: userId },
+                { $pull: { signedEvents: eventId } },
+                { new: true }
+            )
+
+            return event;
+            
         }
     }
 };

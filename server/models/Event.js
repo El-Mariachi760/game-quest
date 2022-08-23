@@ -61,7 +61,7 @@ const eventSchema = new Schema(
         signedPeople: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
             }
         ]
     },

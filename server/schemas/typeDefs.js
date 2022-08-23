@@ -92,6 +92,8 @@ const typeDefs = gql`
         addEvent(title: String!, type: String, date: String!, location: String!, description: String!, game: String!, maxPeople: Int!): Event
         editEvent(eventId: ID!, title: String!, type: String!, date: String!, location: String!, description: String!, game: String!, maxPeople: Int!): Event
         deleteEvent(eventId: ID!): Event
+        signupForEvent(eventId: ID!): Event
+        removeSignup(eventId: ID!, userId: ID!): Event
     }
 `;
 
