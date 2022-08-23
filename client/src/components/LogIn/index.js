@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 
-function App() {
+function loginForm() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -83,5 +83,4 @@ function App() {
     </div>
   );
 }
-
-export default App;
+export default loginForm;
