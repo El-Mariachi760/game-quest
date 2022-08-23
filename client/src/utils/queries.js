@@ -1,68 +1,80 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_EVENTS = gql`
-  query events($username: String) {
-    events(username: $username) {
+  query GetUser($username: String!) {
+    getUser(username: $username) {
+      createdEvents {
         _id
-        eventName
-        games
-        eventTime
-        eventAddress
-        eventCity
-        eventDetails
-        createdAt
-        username
-        rsvpCount
+        title
+      }
+      signedEvents {
+        _id
+        title
       }
     }
   }
 `;
 
 export const QUERY_EVENT = gql`
-  query event($id: ID!) {
-    event(_id: $id) {
-        _id
-        eventName
-        games
-        eventTime
-        eventAddress
-        eventCity
-        eventDetails
-        createdAt
-        username
-        rsvpCount
-    }
-  }
-`;
-
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+  query EventById($id: ID!) {
+    eventById(_id: $id) {
       _id
-      username
-      friendCount
-      events {
+      title
+      type
+      date
+      location
+      description
+      game
+      maxPeople
+      signedPeople {
         _id
-        eventName
-        eventTime
-        eventAddress
-        rsvpCount
+        username
       }
     }
   }
 `;
 
-export const QUERY_ME = gql`
-  {
-    me {
+export const QUERY_USER = gql`
+  query GetUser($username: String!) {
+    getUser(username: $username) {
       _id
       username
-      friendCount
-      events {
+      email
+      friendRequest {
         _id
-        eventName
-        eventTime
-        rsvpCount
+        username
+      }
+      friends {
+        _id
+        username
+      }
+      friendCount
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  query me {
+    getMe {
+      _id
+      username
+      email
+      friendRequest {
+        _id
+        username
+      }
+      friends {
+        _id
+        username
+      }
+      friendCount
+      createdEvents {
+        _id
+        title
+      }
+      signedEvents {
+        _id
+        title
       }
     }
   }

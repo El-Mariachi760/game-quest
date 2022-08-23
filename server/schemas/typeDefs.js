@@ -57,6 +57,7 @@ const typeDefs = gql`
         friends: [User]
         followers: [User]
         following: [User]
+        friendCount: Int
     }
 
     type Auth {
