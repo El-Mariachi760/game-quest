@@ -11,13 +11,16 @@ function Nav () {
             <nav className="text-center">
                 <ul>
                     <li>
-                        <a href='../pages/Explore.js'>Explore</a>
+                        <Link to="/Login"> LogIn </Link>
                     </li>
                     <li>
-                        <a href='../pages/PrivateEvents.js'>Private Events</a>
+                        <Link to="/"> Home </Link>
                     </li>
                     <li>
-                        <a href='../pages/MyProfile.js'>My Profile</a>
+                        <Link to="/privateEvents">PrivateEvents</Link>
+                    </li>
+                    <li>
+                        <Link to="/myprofile">MyProfile</Link>
                     </li> 
                 </ul>
             </nav>

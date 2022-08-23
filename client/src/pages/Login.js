@@ -1,7 +1,7 @@
 import React from 'react';
 import coverImage from '../assets/pool.jpg';
-import SignUp from './components/SignUp'
-import LogIn from './components/LogIn'
+// import SignUp from './components/SignUp'
+import loginForm from '../components/LogIn';
 
 
 function logIn() {
@@ -16,9 +16,9 @@ function logIn() {
           People have turned to GameQuest to meet people, make friends, find local activities, and even grow a business. 
           Thousands of events are happening every day. What are you waiting for to join the fun?
           </p>
-
-          <button className='loginbtn'>Log In</button>
-          <button className='signupbtn'>Sign Up</button>
+          <loginForm />
+          {/* <button className='loginbtn'>Log In</button>
+          <button className='signupbtn'>Sign Up</button> */}
         </div>
       </section>
     );
