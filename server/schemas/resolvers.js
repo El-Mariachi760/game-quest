@@ -229,22 +229,43 @@ const resolvers = {
         },
 
         removeFriend: async (parent, {friendId}, context) => {
+        },
+      
+        followUser: async (parent, {followId}, context) => {
             if (context.user) {
-                //update user accepting friend request 
                 const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { friends: friendId } },
+                { $addToSet: { following: followId } },
                 { new: true }
-                ).populate("friends");
-    
-                //add user accepting request to the friend list of user sending request
-                const updatedFriend = await User.findOneAndUpdate(
-                    {_id: friendId },
-                    {$pull: {friends: context.user._id}},
-                    {new: true }
-                );
-    
-    
+                ).populate("following");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        unfollowUser: async (parent, {unfollowId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { following: unfollowId } },
+                { new: true }
+                ).populate("following");
+        
+                return updatedUser;
+            }
+        
+            throw new AuthenticationError("You need to be logged in!");
+        },
+      
+        denyFriendRequest: async (parent, {friendId}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { friendRequest: friendId } },
+                { new: true }
+                ).populate("friendRequest");
         
                 return updatedUser;
             }
