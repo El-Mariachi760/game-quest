@@ -6,7 +6,6 @@ function Explore() {
 
       return (
         <div>
-          <Nav />
             <h1>Explore</h1>
         </div>
       );

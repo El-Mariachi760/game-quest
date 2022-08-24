@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import auth from '../../utils/auth';
 
 function Nav () {
+
+    const logout = () => {
+        auth.logout();
+    }
   
     return (
       <header className="bg-secondary mb-4 py-2 flex-row align-center">
@@ -22,6 +27,9 @@ function Nav () {
                     <li>
                         <Link to="/myprofile">MyProfile</Link>
                     </li> 
+                    <li>
+                        <Link to='/' onClick={logout}>Logout</Link>
+                    </li>
                 </ul>
             </nav>
         </div>

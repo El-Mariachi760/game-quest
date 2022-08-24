@@ -1,75 +1,58 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import Auth from '../../utils/auth';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER} from '../../utils/mutations';
 
 
 function LoginForm() {
   // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error }] = useMutation(LOGIN_USER);
 
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     //Prevent page reload
     event.preventDefault();
 
-    var { uname, pass } = document.forms[0];
+    try {
+      const { data } = await login({
+        variables: { ...formState }
+      });
 
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
     }
-  };
 
-  // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
+    setFormState({
+      email: '',
+      password: ''
+    });
+  };
 
   // JSX code for login form
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username </label>
-          <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
+          <label>Email </label>
+          <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} required />
         </div>
         <div className="input-container">
           <label>Password </label>
-          <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
+          <input type="password" name="password" id="password" value={formState.password} onChange={handleChange} required />
         </div>
         <div className="button-container">
-          <input type="submit" />
-          <button>Sign Up</button>
+          <button type='submit'>Login</button>
         </div>
       </form>
     </div>
@@ -79,7 +62,7 @@ function LoginForm() {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        {renderForm}
       </div>
     </div>
   );

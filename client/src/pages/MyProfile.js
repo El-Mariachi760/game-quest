@@ -9,7 +9,6 @@ function MyProfile() {
     return (
       <section>
       <div>
-          <Nav />
           <h1>MyProfile</h1>
 
         <div className='profilepic'>
