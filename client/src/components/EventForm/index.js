@@ -5,7 +5,7 @@ import {ADD_EVENT} from '../../utils/mutations'
 export const EventForm = () => {
   //const [text, setText] = useState("");
   const [title, setTitle] = useState("")
-  const [type, setType] = useState("")
+  const [game, setGame] = useState("")
   const [date, setDate] = useState("")
   const [location, setLocation] = useState("")
   const [description, setDescription] = useState("")
@@ -17,27 +17,40 @@ export const EventForm = () => {
   
 const submitEvent = async event => {
     event.preventDefault();
-    console.log("submitted!")
+    
     const submittedData ={
         title,
-        type,
+        type: 'Private',
         date,
         location,
-        description
+        description,
+        game: game,
+        maxPeople: 20
     }
 
+    const type = 'Private';
+    const maxPeople = 20;
+
+    console.log(submittedData)
     
     try {
-        await addEvent({
-            variables: { submittedData },
+        const { data } = await addEvent({
+            variables: {
+                title,
+                type,
+                date,
+                location,
+                description,
+                game,
+                maxPeople
+            },
         });
+        console.log("submitted!")
+        console.log(data);
         
     } catch (e) {
         console.error(e);
     }
-    
-    
-    console.log(submittedData)
 
     setData(submittedData)
 }
@@ -48,7 +61,7 @@ function renderEvent(){
     return(
         <div>
             <p className="">Event: {data.title}</p>
-            <p>Game: {data.type}</p>
+            <p>Game: {data.game}</p>
             <p>Date: {data.date}</p>
             <p>Location: {data.location}</p>
             <p>Description: {data.description}</p>
@@ -72,23 +85,23 @@ return (
     <>
     <form className="event-form">
         <h2>Plan your next game night!</h2>
-        <label for="event-name">Event name:</label>
+        <label htmlFor="event-name">Event name:</label>
         <input
             type="text"
             id="event-name"
             placeholder="EX: Poker at my place!"
             onChange={(e)=>setTitle(e.target.value)}
         />
-        <label for="games">What games do you want to play?</label>
+        <label htmlFor="games">What games do you want to play?</label>
         <input
             type="text"
             id="games"
             placeholder="EX: Monopoly and Jenga"
-            onChange={(e)=>setType(e.target.value)}
+            onChange={(e)=>setGame(e.target.value)}
         />
-        <label for="event-time">When?</label>
-        <input type="datetime-local" id="event-time" name="event-time" onChange={(e)=>setDate(e.target.value)}></input>
-        <label for="street-address">Where?</label>
+        <label htmlFor="event-time">When?</label>
+        <input type="text" id="event-time" name="event-time" placeholder='EX: 10/02/2002' onChange={(e)=>setDate(e.target.value)}></input>
+        <label htmlFor="street-address">Where?</label>
         <input
             type="text"
             id="street-address"
@@ -96,14 +109,14 @@ return (
             onChange={(e)=>setLocation(e.target.value)}
             
         />
-        {/* <label for="city-state-zip">City, State and Zip:</label>
+        {/* <label htmlFor="city-state-zip">City, State and Zip:</label>
         <input
             type="text"
             id="city-state-zip"
             placeholder="EX: Portland, OR 97035"
             onChange={(e)=>setCity(e.target.value)}
         /> */}
-        <label for="details">Description:</label>
+        <label htmlFor="details">Description:</label>
         <input
             type="text"
             id="details"
