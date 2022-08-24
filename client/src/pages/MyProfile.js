@@ -17,7 +17,7 @@ function MyProfile() {
 
         <div className='Bio'>
           <h2>About Me</h2>
-          <ProfileBio/>
+          {/* <ProfileBio/> */}
         </div >
           <FriendList />
         </div>
