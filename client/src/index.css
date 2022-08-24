@@ -147,7 +147,7 @@ input.details{
 
 .created-event {
   border: 2px solid var(--green);
-  padding: 10px;
+  padding: 20px;
   width: 50%;
   margin: auto;
   justify-content: center;
@@ -211,6 +211,10 @@ input.details{
     font-size: 1.4rem;
   }
 
+  .created-event {
+    font-size: 1.3rem;
+  }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -231,6 +235,10 @@ input.details{
     font-size: 1rem;
   }
 
+  .created-event {
+    font-size: 1.1rem;
+  }
+
 }
 
 @media screen and (max-width: 640px) {
@@ -246,6 +254,10 @@ input.details{
   }
 
   .event-form {
+    font-size: 0.9rem;
+  }
+
+  .created-event {
     font-size: 0.9rem;
   }
 
