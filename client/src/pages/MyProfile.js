@@ -9,8 +9,8 @@ function MyProfile() {
     return (
       <section>
       <div>
-          <h1>MyProfile</h1>
 
+          <h1 className='page-title'>My Profile</h1>
         <div className='profilepic'>
         <ProfilePic/>
         </div>
@@ -19,7 +19,6 @@ function MyProfile() {
           <h2>About Me</h2>
           <ProfileBio/>
         </div >
-
           <FriendList />
         </div>
 
