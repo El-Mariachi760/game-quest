@@ -39,13 +39,16 @@ function submitEvent(e){
 function renderEvent(){
     return(
         <div>
-            <p className="">Event: {data.event}</p>
-            <p>Game: {data.game}</p>
+            <div class="space"></div>
+        <div className='created-event'>
+            <p className="event-title">{data.event}</p>
+            <p>What we're playing: {data.game}</p>
             <p>Time: {data.time}</p>
             <p>Address: {data.address}</p>
             <p>City: {data.city}</p>
             <p>Details: {data.details}</p>
-            <button onClick={reserveEvent} disabled={reserveButtonDisable}>RSVP</button>
+            <button className="rsvp-button" onClick={reserveEvent} disabled={reserveButtonDisable}>RSVP</button>
+        </div>
         </div>
 
 
