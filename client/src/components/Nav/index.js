@@ -10,9 +10,9 @@ function Nav () {
   
             <nav className="text-center">
                 <ul>
-                    <li>
+                    {/* <li>
                         <Link to="/Login"> LogIn </Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link to="/"> Home </Link>
                     </li>
