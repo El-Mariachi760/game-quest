@@ -48,6 +48,7 @@ function renderEvent(){
             <p>City: {data.city}</p>
             <p>Details: {data.details}</p>
             <button className="rsvp-button" onClick={reserveEvent} disabled={reserveButtonDisable}>RSVP</button>
+            <div> Reservations: {reserveCount}</div>
         </div>
         </div>
 
@@ -126,7 +127,7 @@ return (
 
 <div> {renderEvent()}</div>
 
-<div> Reservations: {reserveCount}</div>
+
 
     </>
   );

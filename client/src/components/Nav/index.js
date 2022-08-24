@@ -14,16 +14,13 @@ function Nav () {
                     {/* <li>
                         <Link to="/Login"> LogIn </Link>
                     </li> */}
-                    
+                    <input type="text" placeholder="Find your friends"></input>
                     
                     <li>
                         <Link to="/myprofile">My Profile</Link>
                     </li> 
                     <li>
                         <Link to="/privateEvents">Events</Link>
-                    </li>
-                    <li>
-                        <Link to="/"> Home </Link>
                     </li>
                 </ul>
             </nav>

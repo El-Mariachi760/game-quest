@@ -6,7 +6,7 @@ function PrivateEvents() {
 
     return (
       <div>
-          <h1>Events</h1>
+          <h1 className='page-title'>Upcoming Events</h1>
           <EventForm />
       </div>
     );

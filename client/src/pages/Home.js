@@ -14,7 +14,7 @@ function Home() {
         <div>
           <div className='eventFeed'>
             <div className='Header'>
-              <h2>Upcoming Events</h2>
+              <h1 class-name="page-title">Upcoming Events</h1>
             </div>
             <div className='events'>
               <EventList />

@@ -8,7 +8,7 @@ function MyProfile() {
       <div>
         
         
-          <h1>MyProfile</h1>
+          <h1 className='page-title'>My Profile</h1>
           <FriendList />
       </div>
     );
