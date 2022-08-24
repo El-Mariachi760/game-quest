@@ -14,21 +14,27 @@ function Nav () {
             <a className="game-quest" href='/'>
                 <h1>Game Quest</h1>
             </a>
+            <form className='search-bar flex-row'>
+                <input className='find-friends' type="text" placeholder="Find your friends!"></input>
+                <div className='small-space'></div>
+                <button type="submit" className="search-button">
+                    <span class="oi oi-magnifying-glass"></span>    
+                </button>
+            </form>
             <nav className="text-center">
                 <ul>
                     {/* <li>
                         <Link to="/Login"> LogIn </Link>
                     </li> */}
-                    <input type="text" placeholder="Find your friends"></input>
                     
+                    <li>
+                        <Link to='/' onClick={logout}>Logout</Link>
+                    </li>
                     <li>
                         <Link to="/myprofile">My Profile</Link>
                     </li> 
                     <li>
                         <Link to="/privateEvents">Events</Link>
-                    </li>
-                    <li>
-                        <Link to='/' onClick={logout}>Logout</Link>
                     </li>
 
                 </ul>

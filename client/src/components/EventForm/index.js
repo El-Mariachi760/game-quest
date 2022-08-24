@@ -87,6 +87,7 @@ return (
         <h2>Plan your next game night!</h2>
         <label htmlFor="event-name">Event name:</label>
         <input
+            className='event-form-input'
             type="text"
             id="event-name"
             placeholder="EX: Poker at my place!"
@@ -94,15 +95,24 @@ return (
         />
         <label htmlFor="games">What games do you want to play?</label>
         <input
+            className='event-form-input'
             type="text"
             id="games"
             placeholder="EX: Monopoly and Jenga"
             onChange={(e)=>setGame(e.target.value)}
         />
         <label htmlFor="event-time">When?</label>
-        <input type="text" id="event-time" name="event-time" placeholder='EX: 10/02/2002' onChange={(e)=>setDate(e.target.value)}></input>
+        <input 
+            className='event-form-input'
+            type="text" 
+            id="event-time" 
+            name="event-time" 
+            placeholder='EX: 10/02/2002' 
+            onChange={(e)=>setDate(e.target.value)}>
+        </input>
         <label htmlFor="street-address">Where?</label>
         <input
+            className='event-form-input'
             type="text"
             id="street-address"
             placeholder="Street Address, City, State, and Zip"
@@ -118,6 +128,7 @@ return (
         /> */}
         <label htmlFor="details">Description:</label>
         <input
+            className='event-form-input'
             type="text"
             id="details"
             placeholder="Details about your event"
