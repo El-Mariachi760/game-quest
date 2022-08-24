@@ -1,13 +1,137 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --purple: #52489c;
+  --blue: #4062bb;
+  --green: #94d2bd;
+  --red: #f45b69;
+  --white: #ffffff;
+  --black: #000000;
+  --border-radius: 0.3rem;
+  --spacing-one: calc(1rem * 0.25);
+  --spacing-two: calc(1rem * 0.5);
+  --spacing-three: 1rem;
+  --spacing-four: calc(1rem * 1.5);
+  --spacing-five: calc(1rem * 3);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Barlow', monospace;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 20px;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header{
+  background-color: var(--blue);
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+a {
+  color: var(--white);
+  text-decoration: none;
+  display: block;
+  padding: 0 9px;
+  background-color: var(--blue);
+}
+
+a:hover {
+  color: var(--green);
+}
+
+.align-center {
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  float: right;
+  font-size: 2rem;
+  padding: 0 9px;
+}
+
+
+@media screen and (max-width: 1200px) {
+
+}
+
+@media screen and (max-width: 992px) {
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  li {
+    font-size: 1.5rem;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size : 1.5rem;
+  }
+
+  li{
+    font-size: 1.25rem;
+  }
+
+}
+
+@media screen and (max-width: 640px) {
+
+  .container {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .game-quest {
+    text-align: center;
+    width: 100%;
+  }
+
 }

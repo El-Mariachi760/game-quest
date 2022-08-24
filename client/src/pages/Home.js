@@ -12,7 +12,6 @@ function Home() {
     // }
       return (
         <div>
-          <Nav />
           <div className='eventFeed'>
             <div className='Header'>
               <h2>Upcoming Events</h2>
