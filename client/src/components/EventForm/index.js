@@ -1,37 +1,45 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import {ADD_EVENT} from '../../utils/mutations'
 
 export const EventForm = () => {
   //const [text, setText] = useState("");
-  const [event, setEvent] = useState("")
-  const [game, setGame] = useState("")
-  const [time, setTime] = useState("")
-  const [address, setAddress] = useState("")
-  const [city, setCity] = useState("")
-  const [details, setDetails] = useState("")
+  const [title, setTitle] = useState("")
+  const [type, setType] = useState("")
+  const [date, setDate] = useState("")
+  const [location, setLocation] = useState("")
+  const [description, setDescription] = useState("")
   const [data, setData]= useState({})
+  const [addEvent, { error }] = useMutation(ADD_EVENT);
 
   const [reserveCount, setReserveCount]= useState(0);
   const [reserveButtonDisable, setReserveButtonDisable] = useState(false)
   
-function submitEvent(e){
-    e.preventDefault();
+const submitEvent = async event => {
+    event.preventDefault();
     console.log("submitted!")
     const submittedData ={
-        event,
-        game,
-        time,
-        address,
-        city,
-        details,
+        title,
+        type,
+        date,
+        location,
+        description
     }
 
+    
+    try {
+        await addEvent({
+            variables: { submittedData },
+        });
+        
+    } catch (e) {
+        console.error(e);
+    }
+    
+    
     console.log(submittedData)
 
     setData(submittedData)
-
-
 }
 
 
@@ -39,17 +47,12 @@ function submitEvent(e){
 function renderEvent(){
     return(
         <div>
-            <div class="space"></div>
-        <div className='created-event'>
-            <p className="event-title">{data.event}</p>
-            <p>What we're playing: {data.game}</p>
-            <p>Time: {data.time}</p>
-            <p>Address: {data.address}</p>
-            <p>City: {data.city}</p>
-            <p>Details: {data.details}</p>
-            <button className="rsvp-button" onClick={reserveEvent} disabled={reserveButtonDisable}>RSVP</button>
-            <div> Reservations: {reserveCount}</div>
-        </div>
+            <p className="">Event: {data.title}</p>
+            <p>Game: {data.type}</p>
+            <p>Date: {data.date}</p>
+            <p>Location: {data.location}</p>
+            <p>Description: {data.description}</p>
+            <button onClick={reserveEvent} disabled={reserveButtonDisable}>RSVP</button>
         </div>
 
 
@@ -67,67 +70,52 @@ function reserveEvent(){
 
 return (
     <>
-    <div className="event-form">
-    <form >
-        <h3 className='form-title'>Plan your next game night!</h3>
-        <div className='form-line'>
-            <label for="event-name">Event name:</label>
-            <input
-                type="text"
-                id="event-name"
-                placeholder="EX: Poker at my place!"
-                onChange={(e)=>setEvent(e.target.value)}
-            />
-        </div>
-        <div className='form-line'>
-            <label for="games">What games do you want to play?</label>
-            <input
-                type="text"
-                id="games"
-                placeholder="EX: Monopoly and Jenga"
-                onChange={(e)=>setGame(e.target.value)}
-            />
-        </div>
-        <div className='form-line'>
-            <label for="event-time">When?</label>
-            <input type="datetime-local" id="event-time" name="event-time" onChange={(e)=>setTime(e.target.value)}></input>
-        </div>
-        <div className='form-line'>
-            <label for="street-address">Where?</label>
-            <input
-                type="text"
-                id="street-address"
-                placeholder="Street Address"
-                onChange={(e)=>setAddress(e.target.value)}
-                
-            />
-        </div>
-        <div className='form-line'>
-            <label for="city-state-zip">City, State and Zip:</label>
-            <input
-                type="text"
-                id="city-state-zip"
-                placeholder="EX: Portland, OR 97035"
-                onChange={(e)=>setCity(e.target.value)}
-            />
-        </div>
-        <div className='form-line'>
-            <label for="details">Details:</label>
-            <input
-                type="text"
-                id="details"
-                className='details'
-                placeholder="Details about your event"
-                onChange={(e)=>setDetails(e.target.value)}
-            />
-        </div>
-        <button className='form-button' type="submit" onClick={submitEvent}>Create Event</button>
+    <form className="event-form">
+        <h2>Plan your next game night!</h2>
+        <label for="event-name">Event name:</label>
+        <input
+            type="text"
+            id="event-name"
+            placeholder="EX: Poker at my place!"
+            onChange={(e)=>setTitle(e.target.value)}
+        />
+        <label for="games">What games do you want to play?</label>
+        <input
+            type="text"
+            id="games"
+            placeholder="EX: Monopoly and Jenga"
+            onChange={(e)=>setType(e.target.value)}
+        />
+        <label for="event-time">When?</label>
+        <input type="datetime-local" id="event-time" name="event-time" onChange={(e)=>setDate(e.target.value)}></input>
+        <label for="street-address">Where?</label>
+        <input
+            type="text"
+            id="street-address"
+            placeholder="Street Address, City, State, and Zip"
+            onChange={(e)=>setLocation(e.target.value)}
+            
+        />
+        {/* <label for="city-state-zip">City, State and Zip:</label>
+        <input
+            type="text"
+            id="city-state-zip"
+            placeholder="EX: Portland, OR 97035"
+            onChange={(e)=>setCity(e.target.value)}
+        /> */}
+        <label for="details">Description:</label>
+        <input
+            type="text"
+            id="details"
+            placeholder="Details about your event"
+            onChange={(e)=>setDescription(e.target.value)}
+        />
+        <button type="submit" onClick={submitEvent}>Create Event</button>
     </form>
-    </div>
 
 <div> {renderEvent()}</div>
 
-
+<div> Reservations: {reserveCount}</div>
 
     </>
   );
