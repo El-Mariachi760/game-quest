@@ -2,6 +2,7 @@ import React from 'react';
 import coverImage from '../assets/pool.jpg';
 // import SignUp from './components/SignUp'
 import LoginForm from '../components/LogIn';
+import SignUp from '../components/SignUp';
 
 
 function logIn() {
@@ -19,6 +20,7 @@ function logIn() {
         </div>
         <div className="about2">
           <LoginForm />
+          <SignUp />
         </div>
       </section>
     );

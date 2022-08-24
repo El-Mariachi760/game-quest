@@ -12,12 +12,12 @@ function MyProfile() {
 
           <h1 className='page-title'>My Profile</h1>
         <div className='profilepic'>
-        <ProfilePic/>
+        {/* <ProfilePic/> */}
         </div>
 
         <div className='Bio'>
           <h2>About Me</h2>
-          <ProfileBio/>
+          {/* <ProfileBio/> */}
         </div >
           <FriendList />
         </div>
