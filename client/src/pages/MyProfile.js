@@ -6,9 +6,6 @@ function MyProfile() {
 
     return (
       <div>
-        
-        
-          <Nav />
           <h1>MyProfile</h1>
           <FriendList />
       </div>
