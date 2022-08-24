@@ -6,7 +6,7 @@ function PrivateEvents() {
 
     return (
       <div>
-          <h1>PrivateEvents</h1>
+          <h1>Events</h1>
           <EventForm />
       </div>
     );

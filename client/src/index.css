@@ -1,10 +1,11 @@
 :root {
-  --purple: #52489c;
-  --blue: #4062bb;
-  --green: #94d2bd;
+  --purple: #5D42D6;
+  --blue: #071E22;
+  --green: #8bc3b4;
   --red: #f45b69;
   --white: #ffffff;
   --black: #000000;
+  --opal: #B7CCC7;
   --border-radius: 0.3rem;
   --spacing-one: calc(1rem * 0.25);
   --spacing-two: calc(1rem * 0.5);
@@ -63,7 +64,7 @@ a {
 }
 
 a:hover {
-  color: var(--green);
+  color: var(--purple);
 }
 
 .align-center {
@@ -94,9 +95,65 @@ li {
   padding: 0 9px;
 }
 
+.event-form {
+  border: 2px solid var(--blue);
+  padding: 20px;
+  width: 50%;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  border-radius: 20px;
+  background-color: var(--green);
+  font-size: 1.5rem;
+}
+
+label {
+  padding: 25px;
+}
+
+input {
+  padding: 6px;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+}
+
+input.details{
+  resize: vertical;
+}
+
+.form-title {
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 10px;
+}
+
+.form-line {
+  padding: 8px;
+}
+
+.form-button {
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  font-size: 1rem;
+}
+
+.form-button:hover {
+  background-color: var(--purple);
+  cursor: pointer;
+}
+
 
 @media screen and (max-width: 1200px) {
+  label {
+    width: 100%;
+  }
 
+  input {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -109,6 +166,14 @@ li {
     font-size: 1.5rem;
   }
 
+  .event-form {
+    font-size: 1.15rem;
+  }
+
+  .form-title {
+    font-size: 1.4rem;
+  }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -118,6 +183,15 @@ li {
 
   li{
     font-size: 1.25rem;
+  }
+
+  .form-title {
+    font-size: 1.1rem;
+    padding: 5px;
+  }
+
+  .event-form {
+    font-size: 1rem;
   }
 
 }
@@ -132,6 +206,10 @@ li {
   .game-quest {
     text-align: center;
     width: 100%;
+  }
+
+  .event-form {
+    font-size: 0.9rem;
   }
 
 }

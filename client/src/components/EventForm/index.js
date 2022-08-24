@@ -63,48 +63,63 @@ function reserveEvent(){
 
 return (
     <>
-    <form className="event-form">
-        <h2>Plan your next game night!</h2>
-        <label for="event-name">Event name:</label>
-        <input
-            type="text"
-            id="event-name"
-            placeholder="EX: Poker at my place!"
-            onChange={(e)=>setEvent(e.target.value)}
-        />
-        <label for="games">What games do you want to play?</label>
-        <input
-            type="text"
-            id="games"
-            placeholder="EX: Monopoly and Jenga"
-            onChange={(e)=>setGame(e.target.value)}
-        />
-        <label for="event-time">When?</label>
-        <input type="datetime-local" id="event-time" name="event-time" onChange={(e)=>setTime(e.target.value)}></input>
-        <label for="street-address">Where?</label>
-        <input
-            type="text"
-            id="street-address"
-            placeholder="Street Address"
-            onChange={(e)=>setAddress(e.target.value)}
-            
-        />
-        <label for="city-state-zip">City, State and Zip:</label>
-        <input
-            type="text"
-            id="city-state-zip"
-            placeholder="EX: Portland, OR 97035"
-            onChange={(e)=>setCity(e.target.value)}
-        />
-        <label for="details">Details:</label>
-        <input
-            type="text"
-            id="details"
-            placeholder="Details about your event"
-            onChange={(e)=>setDetails(e.target.value)}
-        />
-        <button type="submit" onClick={submitEvent}>Create Event</button>
+    <div className="event-form">
+    <form >
+        <h3 className='form-title'>Plan your next game night!</h3>
+        <div className='form-line'>
+            <label for="event-name">Event name:</label>
+            <input
+                type="text"
+                id="event-name"
+                placeholder="EX: Poker at my place!"
+                onChange={(e)=>setEvent(e.target.value)}
+            />
+        </div>
+        <div className='form-line'>
+            <label for="games">What games do you want to play?</label>
+            <input
+                type="text"
+                id="games"
+                placeholder="EX: Monopoly and Jenga"
+                onChange={(e)=>setGame(e.target.value)}
+            />
+        </div>
+        <div className='form-line'>
+            <label for="event-time">When?</label>
+            <input type="datetime-local" id="event-time" name="event-time" onChange={(e)=>setTime(e.target.value)}></input>
+        </div>
+        <div className='form-line'>
+            <label for="street-address">Where?</label>
+            <input
+                type="text"
+                id="street-address"
+                placeholder="Street Address"
+                onChange={(e)=>setAddress(e.target.value)}
+                
+            />
+        </div>
+        <div className='form-line'>
+            <label for="city-state-zip">City, State and Zip:</label>
+            <input
+                type="text"
+                id="city-state-zip"
+                placeholder="EX: Portland, OR 97035"
+                onChange={(e)=>setCity(e.target.value)}
+            />
+        </div>
+        <div className='form-line'>
+            <label for="details">Details:</label>
+            <input
+                type="text"
+                id="details"
+                className='details'
+                placeholder="Details about your event"
+                onChange={(e)=>setDetails(e.target.value)}
+            />
+        </div>
+        <button className='form-button' type="submit" onClick={submitEvent}>Create Event</button>
     </form>
+    </div>
 
 <div> {renderEvent()}</div>
 
