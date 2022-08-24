@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import auth from '../../utils/auth';
 
 function Nav () {
+
+    const logout = () => {
+        auth.logout();
+    }
   
     return (
       <header className="flex-row">
@@ -22,6 +27,10 @@ function Nav () {
                     <li>
                         <Link to="/privateEvents">Events</Link>
                     </li>
+                    <li>
+                        <Link to='/' onClick={logout}>Logout</Link>
+                    </li>
+
                 </ul>
             </nav>
         </div>
