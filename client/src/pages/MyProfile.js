@@ -12,7 +12,7 @@ function MyProfile() {
 
           <h1 className='page-title'>My Profile</h1>
         <div className='profilepic'>
-        <ProfilePic/>
+        {/* <ProfilePic/> */}
         </div>
 
         <div className='Bio'>
