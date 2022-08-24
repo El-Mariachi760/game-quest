@@ -6,13 +6,24 @@ import ProfilePic from '../assets/ProfilePic'
 function MyProfile() {
 
     return (
+      <section>
       <div>
-        
           <Nav />
           <h1>MyProfile</h1>
-          <ProfilePic/>
+
+        <div className='profilepic'>
+        <ProfilePic/>
+        </div>
+
+        <div className='Bio'>
+          <h2>About Me</h2>
+          <ProfileBio/>
+        </div >
+        
           <FriendList />
-      </div>
+        </div>
+
+      </section>
     );
   }
   
