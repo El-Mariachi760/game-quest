@@ -16,8 +16,8 @@ function Home() {
         <div>
           <Nav />
           <div className='eventFeed'>
-            <div className='Header'>
-              <h1 class-name="page-title">Upcoming Events</h1>
+            <div className='page-title'>
+              <h1>Upcoming Events</h1>
             </div>
             <div className='events'>
               <EventList data={data} />

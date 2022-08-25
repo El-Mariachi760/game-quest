@@ -31,15 +31,31 @@ function EventList({ data }) {
             <ul>
             {
                 data.events.map((data)=> (
-                    <li key={data.title}>
-                        {data.title}----
-                        {data.type}---
-                        When: {data.date}---
-                        Where: {data.location}---
-                        Game: {data.game}---
+                    <div>
+                    <li className="created-event" key={data.title}>
+                        <div class="event-title">
+                            {data.title}
+                        </div>
+                        <div>
+                            Event type: {data.type}
+                        </div>
+                        <div>
+                            When: {data.date}
+                        </div>
+                        <div>
+                            Where: {data.location}
+                        </div>
+                        <div>
+                            Game: {data.game}
+                        </div>
+                        <div>
                         Guest List: {data.signedPeople.length}/{data.maxPeople}
-                        <button onClick={event => rsvpToEvent(event, data._id)} >RSVP</button>
+                            </div>
+                        <button className="rsvp-button" onClick={event => rsvpToEvent(event, data._id)} disabled={reserveButtonDisable}>RSVP</button>
+                        
                     </li>
+                    <div className='space'></div>
+                    </div>
                 ))
             }
             </ul>

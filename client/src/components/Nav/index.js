@@ -22,13 +22,13 @@ function Nav () {
                 </button>
             </form>
             <nav className="text-center">
-                <ul>
+                <ul className='nav-links'>
                     {/* <li>
                         <Link to="/Login"> LogIn </Link>
                     </li> */}
 
                     
-                    <li>
+                    <li >
                         <Link to='/' onClick={logout}>Logout</Link>
                     </li>
                     <li>

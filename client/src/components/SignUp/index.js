@@ -52,20 +52,17 @@ return (
     <form>
         {/* Labels and inputs for form data */}
         <div>
-        <label className="label">Username:</label>
-        <input name="username" onChange={handleChange} className="input"
-        value={formState.username} type="text" />
+        <input name="username" onChange={handleChange} className="input" 
+        value={formState.username} type="text" placeholder="Username"/>
         </div>
         <div>
-        <label className="label">Email:</label>
         <input name="email" onChange={handleChange} className="input"
-        value={formState.email} type="email" />
+        value={formState.email} type="email" placeholder="Email" />
         </div>
 
         <div>
-        <label className="label">Password:</label>
         <input name="password" onChange={handleChange} className="input"
-        value={formState.password} type="password" />
+        value={formState.password} type="password" placeholder="Password"/>
         </div>
         <div className='button-container'>
             <button onClick={handleSubmit} className="signup-btn" type="submit">

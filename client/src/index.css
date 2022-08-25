@@ -89,7 +89,7 @@ ul {
   padding: 0;
 }
 
-li {
+nav li {
   display: inline;
   float: right;
   font-size: 2rem;
@@ -120,6 +120,7 @@ input {
   padding: 6px;
   border: 1px solid var(--blue);
   border-radius: 5px;
+  text-align: center;
 }
 
 input.details{
@@ -153,7 +154,7 @@ input.details{
 .created-event {
   border: 2px solid var(--green);
   padding: 20px;
-  width: 50%;
+  width: 60%;
   margin: auto;
   justify-content: center;
   text-align: center;
@@ -167,6 +168,7 @@ input.details{
   background-color: var(--green);
   font-size: 1.75rem;
   border-radius: 10px;
+  padding: 5px;
   color: var(--blue)
 }
 
@@ -274,8 +276,7 @@ input.details{
 }
 
 .poker {
-  width: 40%;
-  float: right;
+  width: 50%;
   border-radius: 20px;
 }
 
@@ -312,9 +313,19 @@ input.details{
   margin-top: 0px;
 }
 
+.poker-sm {
+  display: none;
+}
+
+
+
 @media screen and (max-width: 1200px) {
   label {
     width: 100%;
+  }
+
+  .poker {
+    display: none;
   }
 
   event-form-input {
@@ -325,6 +336,7 @@ input.details{
     width: 100%;
     text-align: center;
   }
+
 
   ul{
     width: 100%;
@@ -368,6 +380,16 @@ input.details{
     font-size: 1.3rem;
   }
 
+  .search-bar {
+    justify-content: center;
+    margin: auto;
+  }
+
+  .nav-links {
+    justify-content: center;
+    text-align: center;
+  }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -376,7 +398,11 @@ input.details{
   }
 
   li{
-    font-size: 1.25rem;
+    font-size: 1rem;
+  }
+  .nav-links {
+    justify-content: center;
+    text-align: center;
   }
 
   .form-title {
@@ -413,5 +439,6 @@ input.details{
   .created-event {
     font-size: 0.9rem;
   }
+
 
 }

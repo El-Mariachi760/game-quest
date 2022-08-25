@@ -44,12 +44,10 @@ function LoginForm() {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Email: </label>
-          <input type="email" name="email" id="email" value={formState.email} onChange={handleChange} required />
+          <input type="email" name="email" id="email" placeholder="Email" value={formState.email} onChange={handleChange} required />
         </div>
         <div className="input-container">
-          <label>Password: </label>
-          <input type="password" name="password" id="password" value={formState.password} onChange={handleChange} required />
+          <input type="password" name="password" id="password" placeholder="Password"value={formState.password} onChange={handleChange} required />
         </div>
         <div className="button-container">
           <button className='login-btn' type='submit'>Login</button>
