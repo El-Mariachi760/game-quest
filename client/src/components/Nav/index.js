@@ -19,19 +19,19 @@ function Nav () {
                     {/* <li>
                         <Link to="/Login"> LogIn </Link>
                     </li> */}
-                    <input type="text" placeholder="Find your friends"></input>
+                    <li>
+                        <Link to='/' onClick={logout}>Logout</Link>
+                    </li>
                     
                     <li>
                         <Link to="/myprofile">My Profile</Link>
                     </li> 
                     <li>
-                        <Link to="/privateEvents">Events</Link>
-                    </li>
-                    <li>
-                        <Link to='/' onClick={logout}>Logout</Link>
+                        <Link to="/privateEvents">Add Event!</Link>
                     </li>
 
                 </ul>
+                    {/* <input type="text" placeholder="Find your friends"></input> */}
             </nav>
         </div>
       </header>
