@@ -1,7 +1,7 @@
 import React from 'react';
 import FriendList from '../components/FriendList';
 import Nav from '../components/Nav';
-import ProfilePic from '../assets/Profile-pic.jpg'
+import RSVPEvents from '../components/RSVPEvents';
 import ProfileBio from '../components/ProfileBio'
 
 function MyProfile() {
@@ -14,7 +14,7 @@ function MyProfile() {
 
           <h1 className='page-title'>My Profile</h1>
         <div className='profilepic'>
-        <ProfilePic/>
+        {/* <ProfilePic/> */}
         </div>
 
         <div className='Bio'>
@@ -22,6 +22,10 @@ function MyProfile() {
           {/* <ProfileBio/> */}
         </div >
           <FriendList />
+        </div>
+
+        <div>
+          <RSVPEvents/>
         </div>
 
       </section>
