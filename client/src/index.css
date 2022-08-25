@@ -280,7 +280,7 @@ input.details{
 }
 
 .login {
-  padding: 20px 50px;
+  padding: 0 20px;
   display: flex;
 }
 
@@ -302,6 +302,14 @@ input.details{
 .signup-container {
   flex: 15%;
   padding: 5px;
+}
+
+.game-quest {
+  text-align: center;
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 20px;
+  margin-top: 0px;
 }
 
 @media screen and (max-width: 1200px) {
