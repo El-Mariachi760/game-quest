@@ -274,8 +274,7 @@ input.details{
 }
 
 .poker {
-  width: 40%;
-  float: right;
+  width: 50%;
   border-radius: 20px;
 }
 
@@ -312,9 +311,17 @@ input.details{
   margin-top: 0px;
 }
 
+.poker-sm {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
   label {
     width: 100%;
+  }
+
+  .poker {
+    display: none;
   }
 
   event-form-input {
