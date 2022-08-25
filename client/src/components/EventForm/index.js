@@ -70,6 +70,7 @@ function renderEvent(){
 
 
     // )
+    
 }
 
 function reserveEvent(){ 
@@ -109,7 +110,7 @@ return (
         <label htmlFor="event-time">When?</label>
             <input 
                 className='event-form-input'
-                type="text" 
+                type="date" 
                 id="event-time" 
                 name="event-time" 
                 placeholder='EX: 10/02/2002' 
