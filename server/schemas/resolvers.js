@@ -338,7 +338,7 @@ const resolvers = {
             if(context.user){
                 const event = await Event.findByIdAndUpdate(
                     { _id: eventId },
-                    { $push: { signedPeople: context.user._id } },
+                    { $addToSet: { signedPeople: context.user._id } },
                     { new: true }
                 )
                 .populate('signedPeople');
