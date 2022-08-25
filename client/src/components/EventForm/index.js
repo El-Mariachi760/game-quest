@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import {ADD_EVENT} from '../../utils/mutations'
+import {ADD_EVENT} from '../../utils/mutations';
 
 export const EventForm = () => {
   //const [text, setText] = useState("");
