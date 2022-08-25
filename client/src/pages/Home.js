@@ -2,6 +2,7 @@ import React from 'react';
 import EventList from '../components/EventList';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_EVENTS } from '../utils/queries';
+import Nav from '../components/Nav';
 
 function Home() {
     const { loading, data } = useQuery(QUERY_ALL_EVENTS);
@@ -13,6 +14,7 @@ function Home() {
       
     return (
         <div>
+          <Nav />
           <div className='eventFeed'>
             <div className='Header'>
               <h1 class-name="page-title">Upcoming Events</h1>

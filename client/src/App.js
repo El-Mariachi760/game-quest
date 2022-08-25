@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Nav from './components/Nav';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyProfile from './pages/MyProfile';
@@ -37,7 +36,6 @@ function App() {
     <ApolloProvider client={client}>
       <div className='App'>
         <Router>
-          <Nav />
           <Routes>
             <Route path="/Login" element={<Login />} />
             <Route element={<PrivateRoutes />}>

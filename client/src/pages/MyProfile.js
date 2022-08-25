@@ -7,7 +7,9 @@ import ProfileBio from '../components/ProfileBio'
 function MyProfile() {
 
     return (
+      
       <section>
+        <Nav />
       <div>
 
           <h1 className='page-title'>My Profile</h1>
