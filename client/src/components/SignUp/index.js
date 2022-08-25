@@ -44,28 +44,34 @@ export default function SignUp() {
 
 
 return (
-<div className="form">
+<div className="signup-form">
     <div>
-        <h1>User Registration</h1>
+        <h2>User Registration</h2>
     </div>
 
     <form>
         {/* Labels and inputs for form data */}
-        <label className="label">Username</label>
+        <div>
+        <label className="label">Username:</label>
         <input name="username" onChange={handleChange} className="input"
         value={formState.username} type="text" />
-
-        <label className="label">Email</label>
+        </div>
+        <div>
+        <label className="label">Email:</label>
         <input name="email" onChange={handleChange} className="input"
         value={formState.email} type="email" />
+        </div>
 
-        <label className="label">Password</label>
+        <div>
+        <label className="label">Password:</label>
         <input name="password" onChange={handleChange} className="input"
         value={formState.password} type="password" />
-
-        <button onClick={handleSubmit} className="btn" type="submit">
-        Submit
-        </button>
+        </div>
+        <div className='button-container'>
+            <button onClick={handleSubmit} className="signup-btn" type="submit">
+            Submit
+            </button>
+        </div>
     </form>
 </div>
 );
