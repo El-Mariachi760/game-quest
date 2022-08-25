@@ -11,7 +11,7 @@ function logIn() {
     return (
       <section className='about1'>
         {/* <img src={coverImage} className="pool flex-row" alt="People playing pool." /> */}
-        
+        <h1 className='game-quest'>Game Quest</h1>
         <div className="login">
           <img className='poker signup-container' src={poker} alt="People playing poker"></img>
           <div className='signup-container'>
@@ -27,10 +27,7 @@ function logIn() {
               </p>
             </div>
           </div>
-          
-          
         </div>
-        
       </section>
     );
 }
