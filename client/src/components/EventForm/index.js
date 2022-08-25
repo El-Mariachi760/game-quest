@@ -58,18 +58,18 @@ const submitEvent = async event => {
 
 
 function renderEvent(){
-    return(
-        <div>
-            <p className="">Event: {data.title}</p>
-            <p>Game: {data.game}</p>
-            <p>Date: {data.date}</p>
-            <p>Location: {data.location}</p>
-            <p>Description: {data.description}</p>
-            <button onClick={reserveEvent} disabled={reserveButtonDisable}>RSVP</button>
-        </div>
+    // return(
+    //     <div>
+    //         <p className="">Event: {data.title}</p>
+    //         <p>Game: {data.game}</p>
+    //         <p>Date: {data.date}</p>
+    //         <p>Location: {data.location}</p>
+    //         <p>Description: {data.description}</p>
+    //         <button onClick={reserveEvent} disabled={reserveButtonDisable}>RSVP</button>
+    //     </div>
 
 
-    )
+    // )
 }
 
 function reserveEvent(){ 
@@ -85,31 +85,38 @@ return (
     <>
     <form className="event-form">
         <h2>Plan your next game night!</h2>
-        <label htmlFor="event-name">Event name:</label>
-        <input
-            className='event-form-input'
-            type="text"
-            id="event-name"
-            placeholder="EX: Poker at my place!"
-            onChange={(e)=>setTitle(e.target.value)}
-        />
-        <label htmlFor="games">What games do you want to play?</label>
-        <input
-            className='event-form-input'
-            type="text"
-            id="games"
-            placeholder="EX: Monopoly and Jenga"
-            onChange={(e)=>setGame(e.target.value)}
-        />
+        <div>
+            <label htmlFor="event-name">Event name:</label>
+            <input
+                className='event-form-input'
+                type="text"
+                id="event-name"
+                placeholder="EX: Poker at my place!"
+                onChange={(e)=>setTitle(e.target.value)}
+            />
+        </div>
+        <div>
+            <label htmlFor="games">What games do you want to play?</label>
+            <input
+                className='event-form-input'
+                type="text"
+                id="games"
+                placeholder="EX: Monopoly and Jenga"
+                onChange={(e)=>setGame(e.target.value)}
+            />
+        </div>
+        <div>
         <label htmlFor="event-time">When?</label>
-        <input 
-            className='event-form-input'
-            type="text" 
-            id="event-time" 
-            name="event-time" 
-            placeholder='EX: 10/02/2002' 
-            onChange={(e)=>setDate(e.target.value)}>
-        </input>
+            <input 
+                className='event-form-input'
+                type="text" 
+                id="event-time" 
+                name="event-time" 
+                placeholder='EX: 10/02/2002' 
+                onChange={(e)=>setDate(e.target.value)}>
+            </input>
+        </div>
+        <div>
         <label htmlFor="street-address">Where?</label>
         <input
             className='event-form-input'
@@ -119,6 +126,7 @@ return (
             onChange={(e)=>setLocation(e.target.value)}
             
         />
+        </div>
         {/* <label htmlFor="city-state-zip">City, State and Zip:</label>
         <input
             type="text"
@@ -126,7 +134,8 @@ return (
             placeholder="EX: Portland, OR 97035"
             onChange={(e)=>setCity(e.target.value)}
         /> */}
-        <label htmlFor="details">Description:</label>
+        <div>
+        <label htmlFor="details">Time/Description:</label>
         <input
             className='event-form-input'
             type="text"
@@ -134,12 +143,13 @@ return (
             placeholder="Details about your event"
             onChange={(e)=>setDescription(e.target.value)}
         />
-        <button type="submit" onClick={submitEvent}>Create Event</button>
+        </div>
+        <button className="form-button" type="submit" onClick={submitEvent}>Create Event</button>
     </form>
 
 <div> {renderEvent()}</div>
 
-<div> Reservations: {reserveCount}</div>
+{/* <div> Reservations: {reserveCount}</div> */}
 
     </>
   );

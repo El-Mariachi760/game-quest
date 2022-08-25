@@ -8,7 +8,7 @@ function PrivateEvents() {
     return (
       <div>
         <Nav />
-          <h1 className='page-title'>Upcoming Events</h1>
+          <h1 className='page-title'>Create an Event</h1>
           <EventForm />
       </div>
     );
