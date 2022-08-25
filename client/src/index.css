@@ -192,15 +192,151 @@ input.details{
   padding: 16px;
 }
 
+.find-friends {
+  border-radius: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.search-button {
+  border-radius: 8px;
+  background-color: white;
+  padding: 12px;
+  border: var(--blue);
+}
+
+.search-button:hover {
+  background-color: var(--purple);
+  cursor: pointer;
+}
+
+.small-space {
+  padding: 3px;
+}
+
+.pool {
+  width: 50%;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.signup-form {
+  border: 2px solid var(--green);
+  padding: 30px;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px;
+  background-color: var(--blue);
+  font-size: 1.5rem;
+  color: white;
+}
+
+.login-form {
+  padding: 30px;
+  border: 2px solid var(--blue);
+  width: 100%;
+  text-align: center;
+  border-radius: 20px;
+  background-color: var(--green);
+  font-size: 1.5rem;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.login-btn {
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 7px 20px;;
+  font-size: 1rem;
+}
+
+.login-btn:hover {
+  background-color: var(--purple);
+  cursor: pointer;
+}
+
+.signup-btn {
+  background-color: var(--green);
+  color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  padding: 7px 20px;;
+  font-size: 1rem;
+}
+
+.signup-btn:hover {
+  background-color: var(--purple);
+  cursor: pointer;
+}
+
+.poker {
+  width: 40%;
+  float: right;
+  border-radius: 20px;
+}
+
+.login {
+  padding: 20px 50px;
+  display: flex;
+}
+
+.button-container {
+  padding: 15px 0 0 0;
+}
+
+.about {
+  padding: 30px;
+  background-color: var(--green);
+  border-radius: 20px;
+  border: 2px solid var(--blue);
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.signup-container {
+  flex: 15%;
+  padding: 5px;
+}
+
 @media screen and (max-width: 1200px) {
   label {
     width: 100%;
   }
 
-  input {
+  event-form-input {
     width: 100%;
   }
+
+  .game-quest {
+    width: 100%;
+    text-align: center;
+  }
+
+  ul{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .search-bar {
+    justify-content: center;
+  }
+
+  .find-friends {
+    font-size: 0.9rem;
+  }
+
+  .search-button {
+    padding: 5px;
+  }
 }
+
+
 
 @media screen and (max-width: 992px) {
 
