@@ -26,6 +26,7 @@ function Nav () {
                     {/* <li>
                         <Link to="/Login"> LogIn </Link>
                     </li> */}
+
                     
                     <li>
                         <Link to='/' onClick={logout}>Logout</Link>
@@ -34,10 +35,13 @@ function Nav () {
                         <Link to="/myprofile">My Profile</Link>
                     </li> 
                     <li>
-                        <Link to="/privateEvents">Events</Link>
+
+                        <Link to="/privateEvents">Add Event!</Link>
+
                     </li>
 
                 </ul>
+                    {/* <input type="text" placeholder="Find your friends"></input> */}
             </nav>
         </div>
       </header>
