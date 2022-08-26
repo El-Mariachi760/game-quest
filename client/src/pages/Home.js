@@ -20,7 +20,7 @@ function Home() {
               <h1>Upcoming Events</h1>
             </div>
             <div className='events'>
-              <EventList data={data} />
+              <EventList data={data.events} queryMe='false'/>
             </div>
 
           </div>

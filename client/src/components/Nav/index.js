@@ -18,7 +18,7 @@ function Nav () {
                 <input className='find-friends' type="text" placeholder="Find your friends!"></input>
                 <div className='small-space'></div>
                 <button type="submit" className="search-button">
-                    <span class="oi oi-magnifying-glass"></span>    
+                    <span className="oi oi-magnifying-glass"></span>    
                 </button>
             </form>
             <nav className="text-center">

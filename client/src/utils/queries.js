@@ -94,6 +94,16 @@ export const QUERY_ME = gql`
       signedEvents {
         _id
         title
+        date
+        description
+        signedPeople {
+          _id
+          username
+        }
+        maxPeople
+        game
+        location
+        type
       }
     }
   }

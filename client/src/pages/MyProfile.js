@@ -12,7 +12,7 @@ function MyProfile() {
         <Nav />
       <div>
 
-          <h1 className='page-title'>My Profile</h1>
+        <h1 className='page-title'>My Profile</h1>
         <div className='profilepic'>
         {/* <ProfilePic/> */}
         </div>
@@ -21,13 +21,15 @@ function MyProfile() {
           <h2>About Me</h2>
           {/* <ProfileBio/> */}
         </div >
+        <div>
+          <h2>Friends List</h2>
           <FriendList />
         </div>
 
         <div>
           <RSVPEvents/>
         </div>
-
+      </div>
       </section>
     );
   }

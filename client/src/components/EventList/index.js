@@ -1,39 +1,60 @@
 import React,{ useState } from 'react';
 import { useMutation } from '@apollo/client';
-import {SIGNUP_FOR_EVENT} from '../../utils/mutations';
+import { SIGNUP_FOR_EVENT, REMOVE_SIGNUP } from '../../utils/mutations';
+import auth from '../../utils/auth';
 
 
 
-function EventList({ data }) {
-    
+function EventList({ data, queryMe }) {
+    const [removeRSVP, {cancelError}] = useMutation(REMOVE_SIGNUP);
     const [rsvp, { error }] = useMutation(SIGNUP_FOR_EVENT);
     const [reserveButtonDisable, setReserveButtonDisable] = useState(false)
 
     const rsvpToEvent = async (event, id) => {
         event.preventDefault();
-        try {
-            await rsvp({
-                variables: {
-                    eventId: id
-                },
-            });
-            console.log("Successfully RSVP'ed!")
-            
-        } catch (e) {
-            console.error(e);
+
+        if(queryMe === 'true'){
+            const userId = auth.getProfile().data._id;
+            try {
+                await removeRSVP({
+                    variables: {
+                        eventId: id,
+                        userId
+                    },
+                });
+                console.log("Successfully removed RSVP'ed!")
+                
+            } catch (e) {
+                console.error(e);
+            } 
+        } else if(queryMe === 'false') {
+            try {
+                await rsvp({
+                    variables: {
+                        eventId: id
+                    },
+                });
+                console.log("Successfully RSVP'ed!")
+                
+            } catch (e) {
+                console.error(e);
+            }    
         }
-    
+        
     }
 
-
+    let RSVP = 'RSVP';
+    if(queryMe === 'true'){
+        RSVP='CANCEL';
+    } 
     return (
         <div>
             <ul>
             {
-                data.events.map((data)=> (
+                data.map((data)=> (
                     <div>
-                    <li className="created-event" key={data.title}>
-                        <div class="event-title">
+                    <li className="created-event" key={data._id}>
+                        <div className="event-title">
                             {data.title}
                         </div>
                         <div>
@@ -51,7 +72,7 @@ function EventList({ data }) {
                         <div>
                         Guest List: {data.signedPeople.length}/{data.maxPeople}
                             </div>
-                        <button className="rsvp-button" onClick={event => rsvpToEvent(event, data._id)} disabled={reserveButtonDisable}>RSVP</button>
+                        <button className="rsvp-button" onClick={event => rsvpToEvent(event, data._id)} disabled={reserveButtonDisable}>{RSVP}</button>
                         
                     </li>
                     <div className='space'></div>
