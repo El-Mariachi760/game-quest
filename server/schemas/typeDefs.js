@@ -83,7 +83,7 @@ const typeDefs = gql`
         deleteUser(username: String!): User
         login(email: String!, password: String!): Auth
         
-        sendFriendRequest(friendId: ID!): User
+        sendFriendRequest(username: String!): User
         followUser(followId: ID!): User
         unfollowUser(unfollowId: ID!): User
 

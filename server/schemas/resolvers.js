@@ -148,10 +148,10 @@ const resolvers = {
             return {token, user};
         },
 
-        sendFriendRequest: async (parent, { friendId }, context) => {
+        sendFriendRequest: async (parent, { username }, context) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
-                { _id: friendId },
+                { username: username },
                 { $addToSet: { friendRequest: context.user._id } },
                 { new: true }
               ).populate("friendRequest");
