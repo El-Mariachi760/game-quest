@@ -1,5 +1,5 @@
 # GAME QUEST
-'
+
 Whatever you're looking to do for fun, GameQuest can help. 
 People have turned to GameQuest to meet people, make friends, find local activities, and even grow a business. Thousands of events are happening every day. Come and join the fun!
               
