@@ -143,8 +143,8 @@ export const REMOVE_FRIEND = gql`
 `;
 
 export const SEND_FRIEND_REQUEST = gql`
-  mutation SendFriendRequest($friendId: ID!) {
-    sendFriendRequest(friendId: $friendId) {
+  mutation SendFriendRequest($username: String!) {
+    sendFriendRequest(username: $username) {
       _id
       username
       email

@@ -1,18 +1,9 @@
 import React from "react";
 import EventList from "../EventList";
-import { QUERY_ME } from '../../utils/queries';
-import { useQuery } from '@apollo/client';
-import auth from '../../utils/auth';
 
-function RSVPEvents () {
-    const username = auth.getProfile().data.username
-    const { loading, data } = useQuery(QUERY_ME);
 
-    if(loading){
-        return (
-            <h1>Loading...</h1>
-        )
-    }
+function RSVPEvents ({ data }) {
+    
     return (
         <div>
             <h2>RSVP Events</h2>

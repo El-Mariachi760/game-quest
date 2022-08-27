@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { friendsArray } from '../../helpers/friendsArray';
 
 const FriendList = ({ friendCount, username, friends }) => {
     if (!friends || !friends.length) {
@@ -12,6 +10,11 @@ const FriendList = ({ friendCount, username, friends }) => {
         <h5>
           {username} has {friendCount} {friendCount === 1 ? 'friend' : 'friends'}
         </h5>
+        {
+          friends.map((data) => (
+            <h5 key={data._id}>{data.username}</h5>
+          ))
+        }
       </div>
     );
 };
