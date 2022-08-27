@@ -15,6 +15,8 @@ People have turned to GameQuest to meet people, make friends, find local activit
 
 1.  [Built With](#built-with)
 
+1.  [Installation](#installation)
+
 ## Description
 
 
@@ -55,9 +57,11 @@ An application designed to help connect users and local businesses. Users can ho
 ![more](https://img.shields.io/badge/-MORE-e80c0c?logo=more&logoColor=white&logoWidth=40)
 
 
+## Installation
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -94,7 +98,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
