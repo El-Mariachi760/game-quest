@@ -18,7 +18,7 @@ People have turned to GameQuest to meet people, make friends, find local activit
 ## Description
 
 
-An application designed to help connect users and local businesses. Users can host or participate in events located in local businesses by RVSP'ing. A list of RSVP'd events will display on your profile as a reminder to the user. 
+An application designed to help connect users and local businesses. Users can host or participate in events located in local businesses by RVSP'ing. A list of RSVP'd events will display on your profile as well as your friends list of users you chose to follow. User must create an account to be able to access the complete application. 
 
 ## Preview
 
