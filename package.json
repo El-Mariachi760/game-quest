@@ -1,23 +1,18 @@
 {
     "name": "game-quest",
     "version": "1.0.0",
-    "description": "game-quest",
-    "engines": {
-      "node": "18.x"
-    },
+    "description": "",
     "main": "server/server.js",
-    "workspaces": [
-      "client",
-      "server"
-    ],
     "scripts": {
       "start": "node server/server.js",
       "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-      "heroku-postbuild": "cd client && npm run build"
+      "install": "cd server && npm i && cd ../client && npm i",
+      "seed": "cd server && npm run seed",
+      "build": "cd client && npm run build"
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/El-Mariachi760/game-quest"
+      "url": "git+https://github.com/El-Mariachi760/game-quest.git"
     },
     "keywords": [],
     "author": "",
@@ -26,24 +21,7 @@
       "url": "https://github.com/El-Mariachi760/game-quest"
     },
     "homepage": "https://github.com/El-Mariachi760/game-quest#readme",
-    "dependencies": {
-      "@apollo/react-hooks": "^4.0.0",
-      "@emotion/react": "^11.10.0",
-      "antd": "^4.22.4",
-      "apollo-server-express": "^2.25.4",
-      "bcrypt": "^4.0.1",
-      "express": "^4.18.1",
-      "express-graphql": "^0.12.0",
-      "graphql": "^15.8.0",
-      "heroku": "^7.62.0",
-      "jsonwebtoken": "^8.5.1",
-      "mongoose": "^6.5.2"
-  
-    },
     "devDependencies": {
-      "concurrently": "^5.1.0",
-      "tailwindcss": "^3.1.8",
-      "prettier": "^2.7.1"
-    },
-    "heroku-run-build-script": true
+      "concurrently": "^7.3.0"
+    }
   }
