@@ -26,7 +26,7 @@ An application designed to help connect users and local businesses. Users can ho
 
 ## Website
 
-[View Live Site](https://el-mariachi760.github.io/game-quest/)
+[View Live Site](https://game-quest-v01.herokuapp.com/)
 
 ## Contributions
 
