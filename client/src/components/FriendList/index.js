@@ -15,7 +15,7 @@ const FriendList = ({ friendCount, username, friends }) => {
           friends.map((data) => {
             const friendLink = '/profile' + data.username;
             return (
-              <div>
+              <div key={data._id}>
                 <Link key={data._id} to={friendLink}>{data.username}</Link>
               </div>
             )  

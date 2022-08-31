@@ -71,13 +71,14 @@ const userSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
+                unique: true
             }
         ],
 
         friends: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User',
+                ref: 'User'
             }
         ],
 

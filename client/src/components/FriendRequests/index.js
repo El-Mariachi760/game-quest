@@ -32,7 +32,6 @@ const FriendRequest = ({ data }) => {
         <h5>No Friend Requests!</h5>
       )
     }
-    console.log(data);
     return (
       <div>
         {
@@ -40,9 +39,9 @@ const FriendRequest = ({ data }) => {
             const friendLink = '/profile' + request.username;
             return (
               <div key={request._id}>
-                <Link to={friendLink}>{request.username}</Link>
-                <button onClick={() => handleAccept(request._id)}>Accept</button>
-                <button onClick={() => handleDeny(request._id)}>Deny</button>
+                <Link to={friendLink} key={request._id}>{request.username}</Link>
+                <button key={request._id} onClick={() => handleAccept(request._id)}>Accept</button>
+                <button key={request._id} onClick={() => handleDeny(request._id)}>Deny</button>
               </div>
               
             )  

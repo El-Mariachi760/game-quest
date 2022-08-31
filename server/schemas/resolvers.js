@@ -345,7 +345,7 @@ const resolvers = {
 
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { signedEvents: eventId } },
+                    { $addToSet: { signedEvents: eventId } },
                     { new: true }
                 )
 
