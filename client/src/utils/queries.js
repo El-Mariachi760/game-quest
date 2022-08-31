@@ -68,7 +68,22 @@ export const QUERY_USER = gql`
         username
       }
       friendCount
+      signedEvents {
+        _id
+        title
+        date
+        description
+        maxPeople
+        game
+        location
+        type
+        signedPeople {
+          _id
+          username
+        }
+      }  
     }
+    
   }
 `;
 

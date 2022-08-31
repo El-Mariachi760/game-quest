@@ -13,10 +13,12 @@ function Nav () {
         const { value } = event.target;
     
         setFormState(value);
+        
       }
 
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
+        console.log(formState)
         try {
             sendFriendRequest({
                 variables: { username: formState }

@@ -1,8 +1,67 @@
-# Getting Started with Create React App
+# GAME QUEST
+
+Whatever you're looking to do for fun, GameQuest can help. 
+People have turned to GameQuest to meet people, make friends, find local activities, and even grow a business. Thousands of events are happening every day. Come and join the fun!
+              
+## Table of Contents
+  
+1.  [Description](#description)
+
+1.  [Preview](#preview)
+
+1.  [Website](#website)
+
+1.  [Contributions](#contributions)
+
+1.  [Built With](#built-with)
+
+1.  [Installation](#installation)
+
+## Description
+
+
+An application designed to help connect users and local businesses. Users can host or participate in events located in local businesses by RVSP'ing. A list of RSVP'd events will display on your profile as well as your friends list of users you chose to follow. User must create an account to be able to access the complete application. 
+
+## Preview
+
+## Website
+
+[View Live Site](https://el-mariachi760.github.io/game-quest/)
+
+## Contributions
+
+<details>
+
+  <summary>Click to see Contributors</summary>
+  
+ - Alex Hernandez &mdash; [github.com/el-mariachi760](https://github.com/el-mariachi760)
+  
+- Laura Anderson &mdash; [github.com/andersonjaz](https://github.com/andersonjaz)
+  
+- Jolo Cabrera &mdash; [github.com/jolocabrera](https://github.com/jolocabrera)
+
+- Connor Schulz &mdash; [github.com/rubeyschulz](https://github.com/rubeyschulz)
+
+- Jaymee Mccarthy &mdash; [github.com/jaymee602](https://github.com/jaymee602)
+
+</details>
+
+## Built With
+
+![html](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&logoWidth=40)
+![css](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&logoWidth=40)
+![js](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=white&logoWidth=40)
+![graphql](https://img.shields.io/badge/-GraphQl-0769AD?logo=graphql&logoColor=white&logoWidth=40)
+![react](https://img.shields.io/badge/-React-e8810c?logo=react&logoColor=white&logoWidth=40)
+![mern](https://img.shields.io/badge/-MERN-1bcfcf?logo=mern&logoColor=white&logoWidth=40)
+![more](https://img.shields.io/badge/-MORE-e80c0c?logo=more&logoColor=white&logoWidth=40)
+
+
+## Installation
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -39,7 +98,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
