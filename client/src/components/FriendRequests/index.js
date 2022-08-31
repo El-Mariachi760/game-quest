@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_FRIEND, DENY_FRIEND_REQUEST } from '../../utils/mutations';
+import { Link } from 'react-router-dom';
 
 const FriendRequest = ({ data }) => {
   const [addFriend, {addError}] = useMutation(ADD_FRIEND);
@@ -31,18 +32,21 @@ const FriendRequest = ({ data }) => {
         <h5>No Friend Requests!</h5>
       )
     }
-
+    console.log(data);
     return (
       <div>
         {
-          data.map((request) => (
-            <div key={request._id}>
-              <h5>{request.username}</h5>
-              <button onClick={() => handleAccept(request._id)}>Accept</button>
-              <button onClick={() => handleDeny(request._id)}>Deny</button>
-            </div>
-            
-          ))
+          data.map((request) => {
+            const friendLink = '/profile' + request.username;
+            return (
+              <div key={request._id}>
+                <Link to={friendLink}>{request.username}</Link>
+                <button onClick={() => handleAccept(request._id)}>Accept</button>
+                <button onClick={() => handleDeny(request._id)}>Deny</button>
+              </div>
+              
+            )  
+          })
         }
       </div>
     )
