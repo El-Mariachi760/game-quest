@@ -45,10 +45,6 @@ function Profile() {
             <h2>Friends List</h2>
             <FriendList friendCount={data.getUser.friendCount} username={username} friends={data.getUser.friends}/>  
           </div>
-          <div>
-            <h2>Friend Requests</h2>
-            <FriendRequest data={data.getUser.friendRequest} />
-          </div>
 
         </div>
 
