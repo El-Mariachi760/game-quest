@@ -52,7 +52,7 @@ function EventList({ data, queryMe }) {
             <ul>
             {
                 data.map((data)=> (
-                    <div>
+                    <div key={data._id}>
                     <li className="created-event" key={data._id}>
                         <div className="event-title">
                             {data.title}
