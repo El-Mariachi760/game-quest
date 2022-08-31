@@ -4,13 +4,21 @@ import Nav from '../components/Nav';
 import RSVPEvents from '../components/RSVPEvents';
 import ProfileBio from '../components/ProfileBio';
 import FriendRequest from '../components/FriendRequests';
-import { QUERY_ME } from '../utils/queries';
+import { QUERY_USER } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import auth from '../utils/auth';
+import { useParams, Navigate } from 'react-router-dom';
 
-function MyProfile() {
-    const username = auth.getProfile().data.username
-    const { loading, data } = useQuery(QUERY_ME);
+function Profile() {
+    const { username } = useParams();
+
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: { username }
+    });
+
+    if(auth.loggedIn() && auth.getProfile().data.username === username) {
+        return <Navigate to='/myprofile'></Navigate>
+    }
 
     if(loading){
       return (
@@ -35,21 +43,21 @@ function MyProfile() {
         <div>
           <div>
             <h2>Friends List</h2>
-            <FriendList friendCount={data.getMe.friendCount} username={username} friends={data.getMe.friends}/>  
+            <FriendList friendCount={data.getUser.friendCount} username={username} friends={data.getUser.friends}/>  
           </div>
           <div>
             <h2>Friend Requests</h2>
-            <FriendRequest data={data.getMe.friendRequest} />
+            <FriendRequest data={data.getUser.friendRequest} />
           </div>
 
         </div>
 
         <div>
-          <RSVPEvents data={data.getMe}/>
+          <RSVPEvents data={data.getUser}/>
         </div>
       </div>
       </section>
     );
   }
   
-  export default MyProfile;
+  export default Profile;

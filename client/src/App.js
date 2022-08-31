@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import MyProfile from './pages/MyProfile';
 import PrivateEvents from './pages/PrivateEvents';
 import PrivateRoutes from './utils/PrivateRoutes';
+import Profile from './pages/Profile';
 
 // Apollo imports
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
@@ -41,6 +42,7 @@ function App() {
             <Route element={<PrivateRoutes />}>
               <Route path="/" element={<Home />} />
               <Route path="/myprofile" element={<MyProfile />} />
+              <Route path='/profile:username' element={<Profile />} />
               <Route path="/privateEvents" element={<PrivateEvents />} />
             </Route>
           </Routes>
