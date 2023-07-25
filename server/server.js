@@ -5,6 +5,7 @@ const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 const { authMiddleware } = require('./utils/auth');
+const http = require('http');
 
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
@@ -42,6 +43,13 @@ const startApolloServer = async (typeDefs, resolvers) => {
         });
     })
 };
+
+
+// keeps heroku app running
+setInterval(() => {
+  http.get("http://example.herokuapp.com");
+}, 25 * 60 * 1000); // every 25 minutes
+
 
 // call function to start server
 startApolloServer(typeDefs, resolvers);
